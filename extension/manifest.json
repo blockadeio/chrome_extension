@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "__MSG_appName__",
+    "description": "__MSG_appDesc__",
+    "default_locale": "en",
+    "version": "1.1.0",
+    "icons": {
+        "16": "resources/ico/16.png",
+        "48": "resources/ico/48.png",
+        "128": "resources/ico/128.png"
+    },
+    "browser_action": {
+        "default_title": "__MSG_appName__",
+        "default_icon": "resources/ico/16.png"
+    },
+    "options_page": "resources/static/options.html",
+    "permissions": ["tabs", "https://*/", "webRequest", "webRequestBlocking",
+                    "alarms", "notifications"],
+    "background": {
+        "scripts": ["resources/external/jquery.js", "resources/external/md5.js",
+                    "resources/js/utils.js", "resources/js/const.js",
+                    "resources/js/alarms.js", "resources/js/background.js"],
+        "persistent": true
+    },
+    "web_accessible_resources": [
+        "resources/static/warning.html"
+    ]
+}

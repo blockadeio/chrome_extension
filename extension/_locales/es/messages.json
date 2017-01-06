@@ -1,0 +1,160 @@
+{
+    "appName": {
+        "message": "Bloqueo",
+        "description": "Name of the extension as displayed in settings"
+    },
+    "appDesc": {
+        "message": "Bloquear el accesso a sitios web maliciosos desde el navegador.",
+        "description": "Description of the extension as displayed in settings"
+    },
+    "dbgNoServer": {
+        "message": "No se ha especificado la URL del servidor",
+        "description": "Debug message to show when no server URL is defined"
+    },
+    "dbgSavedItems": {
+        "message": "$count$ elementos almacenados localmente.",
+        "description": "Debug message outlining how many indicators were wrote to local storage",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
+    "dbgProcessedEvents": {
+        "message": "Los eventos han sido procesados y limpiados localmente.",
+        "description": "Debug message after processing local event alerts"
+    },
+    "dbgNotificationCreated": {
+        "message": "Notificación creada.",
+        "description": "Debug message after creating a notification"
+    },
+    "dbgEnabed": {
+        "message": "Bloqueo activado.",
+        "description": "Debug message shown when extension is enabled"
+    },
+    "dbgDisabled": {
+        "message": "Bloqueo desactivado.",
+        "description": "Debug message shown when extension is disabled"
+    },
+    "dbgBlockBypass": {
+        "message": "Petición de desvío.",
+        "description": "Debug message when a user requests to bypass blocking"
+    },
+    "dbgRawRequest": {
+        "message": "Petición sin procesar: $request$.",
+        "description": "Debug message showing the raw request that was flagged as malicious",
+        "placeholders": {
+            "request": {
+                "content": "$1"
+            }
+        }
+    },
+    "optionsOn" : {
+        "message": "on",
+        "description": "Value to display when a specific option is enabled"
+    },
+    "optionsOff" : {
+        "message": "off",
+        "description": "Value to display when a specific option is disabled"
+    },
+    "optionsServerUrl": {
+        "message": "URL del servidor",
+        "description": "Label for the server URL option input"
+    },
+    "optionsShowNotifications": {
+        "message": "Notificaciones en pantalla",
+        "description": "Label for the notifications option"
+    },
+    "optionsAnalystAssist": {
+        "message": "Ayuda al analista",
+        "description": "Label for the analyst assist option"
+    },
+    "optionsDebugMode": {
+        "message": "Modo de depuración",
+        "description": "Label for the debug mode option"
+    },
+    "optionsConfigSaved": {
+        "message": "¡Su configuración ha sido guardada correctamente!"
+    },
+    "optionsSaveConfig": {
+        "message": "Guardar",
+        "description": "Label to save the options configuration"
+    },
+    "optionsServerUrlTooltip": {
+        "message": "URL del servidor para procesar indicadores de actividad sospechosa o maliciosa",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsShowNotificationsTooltip": {
+        "message": "Mostrar alertas cuando un evento malicioso es detectado",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsAnalystAssistTooltip": {
+        "message": "Enviar eventos maliciosos directamente a un analista para identificar más detalles del ataque",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsDebugModeTooltip": {
+        "message": "Ejecutar el plugin con toda la salida hacia la consola",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "notifyIndicatorSyncTitle": {
+        "message": "Se actualizó la base de datos de indicadores!",
+        "description": "Title of the notification window when the database updates."
+    },
+    "notifyRequestError": {
+        "message": "La petición a $url$ ha devuelto el estado $status$",
+        "description": "Message to display inside of the notification when a request for data fails",
+        "placeholders": {
+            "url": {
+                "content": "$1"
+            },
+            "status": {
+                "content": "$2"
+            }
+        }
+    },
+    "notifyRequestErrorTitle": {
+        "message": "¡Fallo actualizando indicador!",
+        "description": "Title of the notification window when a request for data fails"
+    },
+    "notifyAlertTitle": {
+        "message": "¡Tráfico malicioso bloqueado!",
+        "description": "Title of the notification window when a malicious event is detected"
+    },
+    "notifyAlertMessage": {
+        "message": "$hostname$ ha efectuado una petición $method$ de tipo $type$.",
+        "description": "Message to display inside of the notification when a malicious event is detected",
+        "placeholders": {
+            "hostname": {
+                "content": "$1"
+            },
+            "method": {
+                "content": "$2"
+            },
+            "type": {
+                "content": "$3"
+            }
+        }
+    },
+    "warningProceedMessage": {
+        "message": "Asumo el riesgo, dame acceso temporal",
+        "description": "Hyperlink label displayed that allows a user to access a malicious resource"
+    },
+    "warningLeaveMessage": {
+        "message": "¡Sácame de aquí!",
+        "description": "Hyperlink label displayed to take a user away from the malicious resource"
+    },
+    "warningAlertTitle": {
+        "message": "¡Sitio sospechoso reportado!",
+        "description": "Main label to display to the user when they visit a malicious resource"
+    },
+    "warningAlertMessage": {
+        "message": "El bloqueo ha identificado <b>$url$</b> como sospechosa. Este sitio web puede estar engañando a los usuarios para realizar una acción peligrosa, como instalar software o revelar información personal (por ejemplo contraseñas, números de teléfono o tarjetas de crédito). Examina los <a class='small-link' data-toggle='collapse' href='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>detalles</a>.",
+        "description": "Detailed message shown to the user when they visit a malicious resource",
+        "placeholders": {
+            "url": {
+                "content": "$1"
+            }
+        }
+    }
+}

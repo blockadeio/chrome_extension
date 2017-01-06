@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html class="options_page">
+
+<head>
+    <title>Blockade Options</title>
+    <link rel="stylesheet" href="../external/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/options.css">
+    <script src="../external/jquery.js"></script>
+    <script src="../external/bootstrap.min.js"></script>
+    <style>
+        #status {
+            float: left;
+            padding-top: 7px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body class="options_page">
+    <div id="wrapper">
+        <div id="options">
+            <fieldset id="format">
+                <legend><span id="serverUrl"></span>
+                    <span id="optionsServerUrlTooltip" class="glyphicon glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title=""></span>
+                </legend>
+                <input type="text" width="200" id="cfg_cloudUrl"><br><br>
+
+                <legend><span id="showNotifications"></span>
+                    <span id="optionsShowNotificationsTooltip" class="glyphicon glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title=""></span>
+                </legend>
+                <input id="notifications" type="radio" name="cfg_notifications" value="true">
+                <label class="on" for=""></label>
+                <input id="notifications" type="radio" name="cfg_notifications" value="false" checked>
+                <label class="off" for=""></label>
+                <br><br>
+
+                <legend><span id="analystAssist"></span>
+                    <span id="optionsAnalystAssistTooltip" class="glyphicon glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title=""></span>
+                </legend>
+                <input id="feedback" type="radio" name="cfg_feedback" value="true">
+                <label class="on" for=""></label>
+                <input id="feedback" type="radio" name="cfg_feedback" value="false" checked>
+                <label class="off" for=""></label>
+                <br><br>
+<!--                 <sub>Send malicious events to a remote cloud node for processing by expert analysts. Only non-identifiable information and data related to the event will be sent.</sub>
+                <br><br>
+ -->
+                <legend><span id="debugMode"></span>
+                    <span id="optionsDebugModeTooltip" class="glyphicon glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title=""></span>
+                </legend>
+                <input id="debug" type="radio" name="cfg_debug" value="true">
+                <label class="on" for=""></label>
+                <input id="debug" type="radio" name="cfg_debug" value="false" checked>
+                <label class="off" for=""></label>
+            </fieldset>
+        </div>
+        <div id="action_panel">
+            <div id="status"></div>
+            <button id="save" type="button" class="btn btn-primary"></button>
+        </div>
+        <script src="../js/options.js"></script>
+    </div>
+</body>
+
+</html>
