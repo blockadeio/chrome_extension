@@ -8,3 +8,13 @@ function buildEvent(metadata, match) {
     Object.assign(log.metadata, metadata);
     return log;
 }
+
+function addProtocol(url) {
+    if (!url || url === "") {
+        return "";
+    }
+    if (!/^(f|ht)tps?:\/\//i.test(url)) {
+        url = "https://" + url;
+    }
+    return url;
+}

@@ -5,6 +5,10 @@ function save_options() {
     for (i = 0; i < input_fields.length; i++) {
         field = input_fields[i];
         value = document.getElementById(field).value;
+        value = addProtocol(value);
+        if (value.slice(-1) !== "/") {
+            value += "/";
+        }
         localStorage[field] = value;
     }
 
