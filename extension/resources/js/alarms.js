@@ -21,7 +21,7 @@ function processEvents() {
             if (data.success) {
                 localStorage.cfg_events = JSON.stringify([]);
                 var msg = chrome.i18n.getMessage("dbgProcessedEvents");
-                if (localStorage.cfg_debug) { console.log(msg); }
+                if (localStorage.cfg_debug === 'true') { console.log(msg); }
             }
         }
     });
@@ -38,7 +38,7 @@ function processEvents() {
 function databaseUpdate() {
     if (localStorage.cfg_cloudUrl === "") {
         msg = chrome.i18n.getMessage("dbgNoServer");
-        if (localStorage.cfg_debug) { console.log(msg); }
+        if (localStorage.cfg_debug === 'true') { console.log(msg); }
         return false;
     }
     localStorage.cfg_isRunning = true;
@@ -48,6 +48,18 @@ function databaseUpdate() {
         url: url,
         type: 'get',
         success: function(data) {
+            if (!data.success) {
+                return false;
+            }
+
+            // First time we get data, we are set to run less frequently
+            if (localStorage.cfg_firstSync) {
+                if (data.indicatorCount > 0) {
+                    localStorage.cfg_firstSync = false;
+                    localStorage.cfg_dbUpdateTime = 60;
+                }
+            }
+
             var indicators = data.indicators;
             for (var key in indicators) {
                 localStorage[key] = JSON.stringify(indicators[key]);
@@ -55,8 +67,9 @@ function databaseUpdate() {
             localStorage.cfg_indicators = JSON.stringify(data);
             var msg = chrome.i18n.getMessage("dbgSavedItems",
                                             [data.indicatorCount]);
-            if (data.indicatorCount > localStorage.cfg_lastIndicatorCount) {
-                if (localStorage.cfg_notifications) {
+            if (data.indicatorCount >
+                    parseInt(localStorage.cfg_lastIndicatorCount)) {
+                if (localStorage.cfg_notifications === 'true') {
                     chrome.notifications.create('info', {
                         type: 'basic',
                         iconUrl: ICON_LARGE,
@@ -64,16 +77,16 @@ function databaseUpdate() {
                         message: msg
                     }, function(notificationId) {
                         msg = chrome.i18n.getMessage("dbgNotificationCreated");
-                        if (localStorage.cfg_debug) { console.log(msg); }
+                        if (localStorage.cfg_debug === 'true') { console.log(msg); }
                     });
                 }
             }
             localStorage.cfg_lastIndicatorCount = data.indicatorCount;
-            if (localStorage.cfg_debug) { console.log(msg); }
+            if (localStorage.cfg_debug === 'true') { console.log(msg); }
         },
         error: function(data) {
             var message = chrome.i18n.getMessage("notifyRequestError",
-                                            [url, data.status]);
+                                                 [url, data.status]);
             chrome.notifications.create('alert', {
                 type: 'basic',
                 iconUrl: ICON_LARGE,
@@ -81,7 +94,7 @@ function databaseUpdate() {
                 message: message
             }, function(notificationId) {
                 msg = chrome.i18n.getMessage("dbgNotificationCreated");
-                if (localStorage.cfg_debug) { console.log(msg); }
+                if (localStorage.cfg_debug === 'true') { console.log(msg); }
             });
         }
     });
@@ -99,9 +112,10 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
 });
 
 // Kick-off alarms
-if (localStorage.cfg_configured) {
+if (localStorage.cfg_configured === 'true') {
     chrome.alarms.create("processEvents",
                          {delayInMinutes: 0.1, periodInMinutes: 0.5});
+    var frequency = parseInt(localStorage.cfg_dbUpdateTime);
     chrome.alarms.create("databaseUpdate",
-                         {delayInMinutes: 0.1, periodInMinutes: 5});
+                         {delayInMinutes: 0.1, periodInMinutes: frequency});
 }

@@ -4,15 +4,15 @@
         "description": "Name of the extension as displayed in settings"
     },
     "appDesc": {
-        "message": "Block malicious websites from being accessed in the browser.",
+        "message": "Blockiert den Zugriff auf bösartige Webseiten im Browser.",
         "description": "Description of the extension as displayed in settings"
     },
     "dbgNoServer": {
-        "message": "No server URL defined",
+        "message": "Keine Server URL definiert",
         "description": "Debug message to show when no server URL is defined"
     },
     "dbgSavedItems": {
-        "message": "$count$ items saved to local storage.",
+        "message": "$count$ Objekte in den lokalen Speicher geschrieben.",
         "description": "Debug message outlining how many indicators were wrote to local storage",
         "placeholders": {
             "count": {
@@ -22,27 +22,27 @@
         }
     },
     "dbgProcessedEvents": {
-        "message": "Events were processed and cleared locally.",
+        "message": "Ereignisse wurden verarbeitet und lokal gelöscht.",
         "description": "Debug message after processing local event alerts"
     },
     "dbgNotificationCreated": {
-        "message": "Notification created.",
+        "message": "Benachrichtigung erstellt.",
         "description": "Debug message after creating a notification"
     },
     "dbgEnabed": {
-        "message": "Blockade enabled.",
+        "message": "Blockade aktiviert.",
         "description": "Debug message shown when extension is enabled"
     },
     "dbgDisabled": {
-        "message": "Blockade disabled.",
+        "message": "Blockade deaktiviert.",
         "description": "Debug message shown when extension is disabled"
     },
     "dbgBlockBypass": {
-        "message": "Requested bypass.",
+        "message": "Erwünschter Zugriff.",
         "description": "Debug message when a user requests to bypass blocking"
     },
     "dbgRawRequest": {
-        "message": "Raw request: $request$.",
+        "message": "Ungefilterte Anfragen: $request$.",
         "description": "Debug message showing the raw request that was flagged as malicious",
         "placeholders": {
             "request": {
@@ -50,12 +50,12 @@
             }
         }
     },
-    "optionsOn" : {
-        "message": "on",
+    "optionsOn": {
+        "message": "AN",
         "description": "Value to display when a specific option is enabled"
     },
-    "optionsOff" : {
-        "message": "off",
+    "optionsOff": {
+        "message": "AUS",
         "description": "Value to display when a specific option is disabled"
     },
     "optionsServerUrl": {
@@ -63,47 +63,47 @@
         "description": "Label for the server URL option input"
     },
     "optionsShowNotifications": {
-        "message": "Pop-up Notifications",
+        "message": "Pop-up Mitteilung",
         "description": "Label for the notifications option"
     },
     "optionsAnalystAssist": {
-        "message": "Analyst Assist",
+        "message": "Analyst Unterstützung",
         "description": "Label for the analyst assist option"
     },
     "optionsDebugMode": {
-        "message": "Debug Mode",
+        "message": "Fehlerbehebungsmodus",
         "description": "Label for the debug mode option"
     },
     "optionsConfigSaved": {
-        "message": "Your configuration was saved successfully!",
+        "message": "Deine Einstellungen wurden erfolgreich gespeichert!",
         "description": "Message to show when the configuration is saved"
     },
     "optionsSaveConfig": {
-        "message": "Save",
+        "message": "Speichern",
         "description": "Label to save the options configuration"
     },
     "optionsServerUrlTooltip": {
-        "message": "Sever URL that will process indicators for suspicious or malicious activity",
+        "message": "Server URL, welche nach Indikatoren für verdächtige oder bösartige Aktivitäten prüft.",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsShowNotificationsTooltip": {
-        "message": "Show desktop notifications when a malicious event is detected",
+        "message": "Zeige Desktop Benachrichtigungen, wenn ein bösartiges Ereignis entdeckt wurde.",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsAnalystAssistTooltip": {
-        "message": "Send malicious events directly to analysts who will identify more details about the attack",
+        "message": "Schicke bösartiges Ereignis direkt an einen Analyst, der mehr Details über den Angriff identifizieren wird.",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsDebugModeTooltip": {
-        "message": "Run the plugin with all output turned on inside of the console",
+        "message": "Lässt das Plugin mit allen Datenausgaben angeschaltet in einer Konsole laufen.",
         "description": "Tooltip data that shows up next to the option label"
     },
     "notifyIndicatorSyncTitle": {
-        "message": "Indicator database updated!",
+        "message": "Indikatorendatenbank aktualisiert!",
         "description": "Title of the notification window when the database updates."
     },
     "notifyRequestError": {
-        "message": "$url$ returned a $status$ status on request.",
+        "message": "$url$ zeigt bei Anfrage einen $status$ Status.",
         "description": "Message to display inside of the notification when a request for data fails",
         "placeholders": {
             "url": {
@@ -115,15 +115,15 @@
         }
     },
     "notifyRequestErrorTitle": {
-        "message": "Indicator updated failure!",
+        "message": "Fehler bei Indikatorenaktualisierung!",
         "description": "Title of the notification window when a request for data fails"
     },
     "notifyAlertTitle": {
-        "message": "Malicious traffic blocked!",
+        "message": "Bösartiger Datenverkehr geblockt!",
         "description": "Title of the notification window when a malicious event is detected"
     },
     "notifyAlertMessage": {
-        "message": "$hostname$ tried to load via a $method$ request using an $type$ element.",
+        "message": "$hostname$ versuchte mittels $method$ Anfrage zu laden, mit Hilfe eines $type$ Elements.",
         "description": "Message to display inside of the notification when a malicious event is detected",
         "placeholders": {
             "hostname": {
@@ -139,18 +139,19 @@
     },
     "warningProceedMessage": {
         "message": "I am willing to accept the risk, temporarily allow access.",
+        "message": "Ich akzeptiere das Risiko, lass much temporär auf die Resource zugreifen",
         "description": "Hyperlink label displayed that allows a user to access a malicious resource"
     },
     "warningLeaveMessage": {
-        "message": "Take me away!",
+        "message": "Lieber nicht!",
         "description": "Hyperlink label displayed to take a user away from the malicious resource"
     },
     "warningAlertTitle": {
-        "message": "Suspicious site reported!",
+        "message": "Verdächtige Webseite gemeldet!",
         "description": "Main label to display to the user when they visit a malicious resource"
     },
     "warningAlertMessage": {
-        "message": "Blockade has reported <b>$url$</b> as suspicious. This website may try to trick you into doing something dangerous like installing software or revealing personal information (for example, passwords, phone numbers, or credit cards). View the <a class='small-link' data-toggle='collapse' href='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>raw details</a>.",
+        "message": "Blockadde hat die < b > $url$ < /b> als verdächtig gemeldet. Dies Webseite könnte versuchen dich zu etwas gefährlichen zu überreden, wie das Installieren von Software oder dem Preisgeben von persönlichen Informationen (z.B. Passwörter, Telefonnummern oder Kreditkartennummern. Schau dir die <a class='small-link' data-toggle='collapse' href='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>ungefilterten Details an</a >.",
         "description": "Detailed message shown to the user when they visit a malicious resource",
         "placeholders": {
             "url": {

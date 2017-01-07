@@ -1,18 +1,18 @@
 {
     "appName": {
-        "message": "Blockade",
+        "message": "Блокада",
         "description": "Name of the extension as displayed in settings"
     },
     "appDesc": {
-        "message": "Block malicious websites from being accessed in the browser.",
+        "message": "Блокирование вредоносных веб сайтов для вашего браузера.",
         "description": "Description of the extension as displayed in settings"
     },
     "dbgNoServer": {
-        "message": "No server URL defined",
+        "message": "Не указан URL сервера",
         "description": "Debug message to show when no server URL is defined"
     },
     "dbgSavedItems": {
-        "message": "$count$ items saved to local storage.",
+        "message": "$count$ элементов сохранено в локально.",
         "description": "Debug message outlining how many indicators were wrote to local storage",
         "placeholders": {
             "count": {
@@ -22,27 +22,27 @@
         }
     },
     "dbgProcessedEvents": {
-        "message": "Events were processed and cleared locally.",
+        "message": "Сообытия были обработаны локально.",
         "description": "Debug message after processing local event alerts"
     },
     "dbgNotificationCreated": {
-        "message": "Notification created.",
+        "message": "Уведомление создано.",
         "description": "Debug message after creating a notification"
     },
     "dbgEnabed": {
-        "message": "Blockade enabled.",
+        "message": "Блокада включена.",
         "description": "Debug message shown when extension is enabled"
     },
     "dbgDisabled": {
-        "message": "Blockade disabled.",
+        "message": "Блокада выключена.",
         "description": "Debug message shown when extension is disabled"
     },
     "dbgBlockBypass": {
-        "message": "Requested bypass.",
+        "message": "Запрошен обход блокировки.",
         "description": "Debug message when a user requests to bypass blocking"
     },
     "dbgRawRequest": {
-        "message": "Raw request: $request$.",
+        "message": "Исходный запрос: $request$.",
         "description": "Debug message showing the raw request that was flagged as malicious",
         "placeholders": {
             "request": {
@@ -51,59 +51,59 @@
         }
     },
     "optionsOn" : {
-        "message": "on",
+        "message": "Вкл",
         "description": "Value to display when a specific option is enabled"
     },
     "optionsOff" : {
-        "message": "off",
+        "message": "Выкл",
         "description": "Value to display when a specific option is disabled"
     },
     "optionsServerUrl": {
-        "message": "Server URL",
+        "message": "URL сервера",
         "description": "Label for the server URL option input"
     },
     "optionsShowNotifications": {
-        "message": "Pop-up Notifications",
+        "message": "Pop-up уведомления",
         "description": "Label for the notifications option"
     },
     "optionsAnalystAssist": {
-        "message": "Analyst Assist",
+        "message": "Помощь Аналитика",
         "description": "Label for the analyst assist option"
     },
     "optionsDebugMode": {
-        "message": "Debug Mode",
+        "message": "Отладочный режим",
         "description": "Label for the debug mode option"
     },
     "optionsConfigSaved": {
-        "message": "Your configuration was saved successfully!",
+        "message": "Ваша конфигурация была успешно сохранена!",
         "description": "Message to show when the configuration is saved"
     },
     "optionsSaveConfig": {
-        "message": "Save",
+        "message": "Сохранить",
         "description": "Label to save the options configuration"
     },
     "optionsServerUrlTooltip": {
-        "message": "Sever URL that will process indicators for suspicious or malicious activity",
+        "message": "URL сервера корорый будет обрабатыватъ индикаторы на подозрительную или вредоносную активностъ",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsShowNotificationsTooltip": {
-        "message": "Show desktop notifications when a malicious event is detected",
+        "message": "Показать уведомления об обнаружении вредоносной активности на экране",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsAnalystAssistTooltip": {
-        "message": "Send malicious events directly to analysts who will identify more details about the attack",
+        "message": "Послать информацию о вредоносных событиях аналитикам которые возможно определят дополнителъные детали атаки",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsDebugModeTooltip": {
-        "message": "Run the plugin with all output turned on inside of the console",
+        "message": "Запуститъ плагин с отладочными сообщениями на консоль",
         "description": "Tooltip data that shows up next to the option label"
     },
     "notifyIndicatorSyncTitle": {
-        "message": "Indicator database updated!",
+        "message": "База индикаторов обновлена!",
         "description": "Title of the notification window when the database updates."
     },
     "notifyRequestError": {
-        "message": "$url$ returned a $status$ status on request.",
+        "message": "$url$ вернул $status$ статус на запрос.",
         "description": "Message to display inside of the notification when a request for data fails",
         "placeholders": {
             "url": {
@@ -115,15 +115,15 @@
         }
     },
     "notifyRequestErrorTitle": {
-        "message": "Indicator updated failure!",
+        "message": "Ошибка обновления индикатора!",
         "description": "Title of the notification window when a request for data fails"
     },
     "notifyAlertTitle": {
-        "message": "Malicious traffic blocked!",
+        "message": "Вредоносный траффик заблокирован!",
         "description": "Title of the notification window when a malicious event is detected"
     },
     "notifyAlertMessage": {
-        "message": "$hostname$ tried to load via a $method$ request using an $type$ element.",
+        "message": "$hostname$ пытался загрузитъ через $method$ запрос исполъзуя $type$ элемент.",
         "description": "Message to display inside of the notification when a malicious event is detected",
         "placeholders": {
             "hostname": {
@@ -138,19 +138,19 @@
         }
     },
     "warningProceedMessage": {
-        "message": "I am willing to accept the risk, temporarily allow access.",
+        "message": "Я принимаю риски, временно разрешить доступ.",
         "description": "Hyperlink label displayed that allows a user to access a malicious resource"
     },
     "warningLeaveMessage": {
-        "message": "Take me away!",
+        "message": "Перейти на безопасный ресурс!",
         "description": "Hyperlink label displayed to take a user away from the malicious resource"
     },
     "warningAlertTitle": {
-        "message": "Suspicious site reported!",
+        "message": "Вредоносный веб сайт!",
         "description": "Main label to display to the user when they visit a malicious resource"
     },
     "warningAlertMessage": {
-        "message": "Blockade has reported <b>$url$</b> as suspicious. This website may try to trick you into doing something dangerous like installing software or revealing personal information (for example, passwords, phone numbers, or credit cards). View the <a class='small-link' data-toggle='collapse' href='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>raw details</a>.",
+        "message": "Блокада выявила  <b>$url$</b> сайт как подозрительный. Данный сайт может попытаться заставить вас согласится на действия комрпометирующие вашу безопасность, например попросить ввести ваш пароль, номер телефона или кредитной карты.or <a class='small-link' data-toggle='collapse' href='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>Посмотреть детально</a>.",
         "description": "Detailed message shown to the user when they visit a malicious resource",
         "placeholders": {
             "url": {

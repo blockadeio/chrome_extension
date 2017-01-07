@@ -18,8 +18,9 @@ var bypass = /#LTBYPASS-[0-9]{5}/;
         localStorage.cfg_isRunning = true;
         localStorage.cfg_configured = false;
         localStorage.cfg_lastIndicatorCount = 0;
+        localStorage.cfg_firstSync = true;
         localStorage.cfg_init = true;
-        console.log(OPTIONS_PAGE);
+        localStorage.cfg_dbUpdateTime = 5;
         chrome.tabs.create({'url': OPTIONS_PAGE});
     }
 })();
@@ -29,19 +30,19 @@ chrome.browserAction.onClicked.addListener(function(tab) {
         localStorage.cfg_isRunning = false;
         chrome.browserAction.setIcon({path: ICON_DARK});
         msg = chrome.i18n.getMessage("dbgDisabled");
-        if (localStorage.cfg_debug) { console.log(msg); }
+        if (localStorage.cfg_debug === 'true') { console.log(msg); }
     } else {
         localStorage.cfg_isRunning = true;
         chrome.browserAction.setIcon({path: ICON_LIGHT});
         msg = chrome.i18n.getMessage("dbgEnabed");
-        if (localStorage.cfg_debug) { console.log(msg); }
+        if (localStorage.cfg_debug === 'true') { console.log(msg); }
     }
 });
 
 chrome.webRequest.onBeforeRequest.addListener(
     function(data) {
         var hashed, indicators;
-        var debug = localStorage.cfg_debug;
+        var debug = localStorage.cfg_debug === 'true';
         var isRunning = localStorage.cfg_isRunning === 'true';
         if (!(isRunning)) {
             return {cancel: false};
@@ -73,7 +74,7 @@ chrome.webRequest.onBeforeRequest.addListener(
             return {cancel: false};
         }
 
-        if (localStorage.cfg_notifications) {
+        if (localStorage.cfg_notifications === 'true') {
             message = chrome.i18n.getMessage("notifyAlertMessage",
                                             [hostname, data.method, data.type]);
             chrome.notifications.create('alert', {

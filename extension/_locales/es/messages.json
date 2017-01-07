@@ -75,7 +75,8 @@
         "description": "Label for the debug mode option"
     },
     "optionsConfigSaved": {
-        "message": "¡Su configuración ha sido guardada correctamente!"
+        "message": "¡Su configuración ha sido guardada correctamente!",
+        "description": "Message to show when the configuration is saved"
     },
     "optionsSaveConfig": {
         "message": "Guardar",

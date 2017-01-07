@@ -22,8 +22,9 @@ function save_options() {
     // Kick-off alarms to perform an update on the indicators
     chrome.alarms.create("processEvents",
                          {delayInMinutes: 0.1, periodInMinutes: 0.5});
+    var frequency = parseInt(localStorage.cfg_dbUpdateTime);
     chrome.alarms.create("databaseUpdate",
-                         {delayInMinutes: 0.1, periodInMinutes: 5});
+                         {delayInMinutes: 0.1, periodInMinutes: frequency});
     localStorage.cfg_configured = true;
 
     // Update status to let user know options were saved.
