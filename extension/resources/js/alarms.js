@@ -56,7 +56,7 @@ function databaseUpdate() {
             if (localStorage.cfg_firstSync) {
                 if (data.indicatorCount > 0) {
                     localStorage.cfg_firstSync = false;
-                    localStorage.cfg_dbUpdateTime = 60;
+                    localStorage.cfg_dbUpdateTime = 15;
                 }
             }
 
