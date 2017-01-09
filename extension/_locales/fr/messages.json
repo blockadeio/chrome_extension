@@ -83,8 +83,7 @@
         "description": "Label to save the options configuration"
     },
     "optionsServerUrlTooltip": {
-        "message": " URL du serveur qui va traiter les indicateurs pour activitées soupçonneuses ou mauvaises
-        ",
+        "message": " URL du serveur qui va traiter les indicateurs pour activitées soupçonneuses ou mauvaises",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsShowNotificationsTooltip": {
@@ -92,8 +91,7 @@
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsAnalystAssistTooltip": {
-        "message": "Envoyer des mauvais événements directement aux analystes qui pourront identifier plus de détails à propos de l'attaque
-        ",
+        "message": "Envoyer des mauvais événements directement aux analystes qui pourront identifier plus de détails à propos de l'attaque",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsDebugModeTooltip": {
@@ -140,9 +138,7 @@
         }
     },
     "warningProceedMessage": {
-        "message": "J’accepte le risque de donner accès
-        temporairement.
-        ",
+        "message": "J’accepte le risque de donner accès temporairement.",
         "description": "Hyperlink label displayed that allows a user to access a malicious resource"
     },
     "warningLeaveMessage": {
