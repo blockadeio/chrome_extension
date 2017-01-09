@@ -18,3 +18,11 @@ function addProtocol(url) {
     }
     return url;
 }
+
+function removeArrayItem(arr, value) {
+    var index = arr.indexOf(value);
+    if (index >= 0) {
+        arr.splice(index, 1);
+    }
+    return arr;
+}

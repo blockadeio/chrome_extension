@@ -14,8 +14,8 @@
         "default_icon": "resources/ico/16.png"
     },
     "options_page": "resources/static/options.html",
-    "permissions": ["tabs", "https://*/", "webRequest", "webRequestBlocking",
-                    "alarms", "notifications"],
+    "permissions": ["tabs", "http://*/", "https://*/", "webRequest",
+                    "webRequestBlocking", "alarms", "notifications"],
     "background": {
         "scripts": ["resources/external/jquery.js", "resources/external/md5.js",
                     "resources/js/utils.js", "resources/js/const.js",

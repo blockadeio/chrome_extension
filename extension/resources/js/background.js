@@ -58,7 +58,7 @@ chrome.webRequest.onBeforeRequest.addListener(
             data.url = data.url.replace(bypass, '');
             localStorage.removeItem(hostname);
             indicators = JSON.parse(localStorage[twoBit]);
-            delete indicators[hashed];
+            indicators = removeArrayItem(indicators, hashed);
             localStorage[twoBit] = JSON.stringify(indicators);
             return {redirectUrl: data.url};
         }
@@ -70,7 +70,7 @@ chrome.webRequest.onBeforeRequest.addListener(
             return {cancel: false};
         }
 
-        if (!indicators.hasOwnProperty(hashed)) {
+        if (indicators.indexOf(hashed) == -1) {
             return {cancel: false};
         }
 
