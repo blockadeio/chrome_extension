@@ -1,0 +1,160 @@
+{
+    "appName": {
+        "message": "Blockade",
+        "description": "Name of the extension as displayed in settings"
+    },
+    "appDesc": {
+        "message": "दुर्भावनापूर्ण वेबसाइटों को ब्राउज़र में रोकें।",
+        "description": "Description of the extension as displayed in settings"
+    },
+    "dbgNoServer": {
+        "message": "इस सर्वर की व्याख्या उपलब्ध नहीं है।",
+        "description": "Debug message to show when no server URL is defined"
+    },
+    "dbgSavedItems": {
+        "message": "$count$ चीज़ें स्थानीय संचय में रक्खी गईं।",
+        "description": "Debug message outlining how many indicators were wrote to local storage",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
+    "dbgProcessedEvents": {
+        "message": "कार्य संसाधित और स्स्थानीय स्तर पर अनुमति दी गयी।",
+        "description": "Debug message after processing local event alerts"
+    },
+    "dbgNotificationCreated": {
+        "message": "अधिसूचना तैयार",
+        "description": "Debug message after creating a notification"
+    },
+    "dbgEnabed": {
+        "message": "रूकावट चालू",
+        "description": "Debug message shown when extension is enabled"
+    },
+    "dbgDisabled": {
+        "message": "रूकावट बंद",
+        "description": "Debug message shown when extension is disabled"
+    },
+    "dbgBlockBypass": {
+        "message": "बाह्यमार्ग अनुरोध",
+        "description": "Debug message when a user requests to bypass blocking"
+    },
+    "dbgRawRequest": {
+        "message": "अनिर्मित अनुरोध: $request$",
+        "description": "Debug message showing the raw request that was flagged as malicious",
+        "placeholders": {
+            "request": {
+                "content": "$1"
+            }
+        }
+    },
+    "optionsOn" : {
+        "message": "चालू",
+        "description": "Value to display when a specific option is enabled"
+    },
+    "optionsOff" : {
+        "message": "बंद",
+        "description": "Value to display when a specific option is disabled"
+    },
+    "optionsServerUrl": {
+        "message": "सर्वर यूआरएल",
+        "description": "Label for the server URL option input"
+    },
+    "optionsShowNotifications": {
+        "message": "पॉप-अप सूचनाएं",
+        "description": "Label for the notifications option"
+    },
+    "optionsAnalystAssist": {
+        "message": "विश्लेषक सहायता",
+        "description": "Label for the analyst assist option"
+    },
+    "optionsDebugMode": {
+        "message": "डिबग मोड",
+        "description": "Label for the debug mode option"
+    },
+    "optionsConfigSaved": {
+        "message": "आपका विन्यास सफलतापूर्वक सहेजा गया है!"
+    },
+    "optionsSaveConfig": {
+        "message": "सेव",
+        "description": "Label to save the options configuration"
+    },
+    "optionsServerUrlTooltip": {
+        "message": "सर्वर यूआरएल जो संदिग्ध या दुर्भावनापूर्ण गतिविधि के लिए संकेतक कार्यवाही करेंगे।",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsShowNotificationsTooltip": {
+        "message": "जब दुर्भावनापूर्ण घटना का पता चले,तब डेस्कटॉप सूचनाएं दिखाएं।",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsAnalystAssistTooltip": {
+        "message": "हमले के विषय में और अधिक जानकारी के लिए दुर्भावनापूर्ण घटनाओं को सीधे विश्लेषकों के पास भेजें।",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsDebugModeTooltip": {
+        "message": "कंसोल के अंदर सभी उत्पादन चालू करके प्लगइन चलाएं।",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "notifyIndicatorSyncTitle": {
+        "message": "संकेतक डेटाबेस तैयार!",
+        "description": "Title of the notification window when the database updates."
+    },
+    "notifyRequestError": {
+        "message": "$url$ ने अनुरोध पर $status$ अवस्था लौटाई।.",
+        "description": "Message to display inside of the notification when a request for data fails",
+        "placeholders": {
+            "url": {
+                "content": "$1"
+            },
+            "status": {
+                "content": "$2"
+            }
+        }
+    },
+    "notifyRequestErrorTitle": {
+        "message": "सूचक अद्यतन विफल!",
+        "description": "Title of the notification window when a request for data fails"
+    },
+    "notifyAlertTitle": {
+        "message": "दुर्भावनापूर्ण यातायात अवरुद्ध!",
+        "description": "Title of the notification window when a malicious event is detected"
+    },
+    "notifyAlertMessage": {
+        "message": "$hostname$ ने $method$ अनुरोध के माध्यम से $type$ तत्त्व का उपयोग कर, चालू होने का प्रयत्न किया।",
+        "description": "Message to display inside of the notification when a malicious event is detected",
+        "placeholders": {
+            "hostname": {
+                "content": "$1"
+            },
+            "method": {
+                "content": "$2"
+            },
+            "type": {
+                "content": "$3"
+            }
+        }
+    },
+    "warningProceedMessage": {
+        "message": "मैं अस्थायी रूप से उपयोग की अनुमति के लिए ख़तरा लेने को तैयार हूँ।",
+        "description": "Hyperlink label displayed that allows a user to access a malicious resource"
+    },
+    "warningLeaveMessage": {
+        "message": "तैयार!",
+        "description": "Hyperlink label displayed to take a user away from the malicious resource"
+    },
+    "warningAlertTitle": {
+        "message": "संदिग्ध साइट सूचना!",
+        "description": "Main label to display to the user when they visit a malicious resource"
+    },
+    "warningAlertMessage": {
+        "message": "सूचना. <b>$url$</b> संदिग्ध है। यह वेबसाइट आपको छलने का प्रयास कर सकता है, जैसे सॉफ्टवेयर स्थापित करने का या व्यक्तिगत जानकारी (उदाहरण के लिए, पासवर्ड, फ़ोन नंबर, या क्रेडिट कार्ड) का खुलासा करने का प्रयास। विवरण यहां देखें  <a class='small-link' data-toggle='collapse' href='#collapseExample' aria-expanded='false' aria-controls='collapseExample'> </a>.",
+        "description": "Detailed message shown to the user when they visit a malicious resource",
+        "placeholders": {
+            "url": {
+                "content": "$1"
+            }
+        }
+    }
+}
