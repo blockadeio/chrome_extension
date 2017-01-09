@@ -1,0 +1,165 @@
+{
+    "appName": {
+        "message": "Blockade",
+        "description": "Name of the extension as displayed in settings"
+    },
+    "appDesc": {
+        "message": "Bloquer l'accès des mauvais sites par le browser.",
+        "description": "Description of the extension as displayed in settings"
+    },
+    "dbgNoServer": {
+        "message": "Pas de URL de serveur défini",
+        "description": "Debug message to show when no server URL is defined"
+    },
+    "dbgSavedItems": {
+        "message": "$count$ objets sauvegardés dans le stockage local.",
+        "description": "Debug message outlining how many indicators were wrote to local storage",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
+    "dbgProcessedEvents": {
+        "message": "événements traité et effacé localement.",
+        "description": "Debug message after processing local event alerts"
+    },
+    "dbgNotificationCreated": {
+        "message": "Notification crée.",
+        "description": "Debug message after creating a notification"
+    },
+    "dbgEnabed": {
+        "message": "Blocage activé.",
+        "description": "Debug message shown when extension is enabled"
+    },
+    "dbgDisabled": {
+        "message": "Blocage désactivé.",
+        "description": "Debug message shown when extension is disabled"
+    },
+    "dbgBlockBypass": {
+        "message": "Détour demandé.",
+        "description": "Debug message when a user requests to bypass blocking"
+    },
+    "dbgRawRequest": {
+        "message": "Demande d’origine: $request$.",
+        "description": "Debug message showing the raw request that was flagged as malicious",
+        "placeholders": {
+            "request": {
+                "content": "$1"
+            }
+        }
+    },
+    "optionsOn": {
+        "message": "allumé",
+        "description": "Value to display when a specific option is enabled"
+    },
+    "optionsOff": {
+        "message": "éteint",
+        "description": "Value to display when a specific option is disabled"
+    },
+    "optionsServerUrl": {
+        "message": "URL du serveur",
+        "description": "Label for the server URL option input"
+    },
+    "optionsShowNotifications": {
+        "message": "Apparition de notifications",
+        "description": "Label for the notifications option"
+    },
+    "optionsAnalystAssist": {
+        "message": "Assistance pour analyste",
+        "description": "Label for the analyst assist option"
+    },
+    "optionsDebugMode": {
+        "message": "Mode Debug",
+        "description": "Label for the debug mode option"
+    },
+    "optionsConfigSaved": {
+        "message": "Votre configuration a été enregistrée correctement!",
+        "description": "Message to show when the configuration is saved"
+    },
+    "optionsSaveConfig": {
+        "message": "enregistrer",
+        "description": "Label to save the options configuration"
+    },
+    "optionsServerUrlTooltip": {
+        "message": " URL du serveur qui va traiter les indicateurs pour activitées soupçonneuses ou mauvaises
+        ",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsShowNotificationsTooltip": {
+        "message": "Montrer les notifications quand un mauvais événement est détecté",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsAnalystAssistTooltip": {
+        "message": "Envoyer des mauvais événements directement aux analystes qui pourront identifier plus de détails à propos de l'attaque
+        ",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsDebugModeTooltip": {
+        "message": "Utiliser le plugin avec tous les détails montrés dans la console",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "notifyIndicatorSyncTitle": {
+        "message": "L'indicateur de base de données a été actualisé!",
+        "description": "Title of the notification window when the database updates."
+    },
+    "notifyRequestError": {
+        "message": "$url$ a retourné $status$ statut par demande.",
+        "description": "Message to display inside of the notification when a request for data fails",
+        "placeholders": {
+            "url": {
+                "content": "$1"
+            },
+            "status": {
+                "content": "$2"
+            }
+        }
+    },
+    "notifyRequestErrorTitle": {
+        "message": "L’indicateur n'a pas pu être actualisé!",
+        "description": "Title of the notification window when a request for data fails"
+    },
+    "notifyAlertTitle": {
+        "message": "Mauvais trafic a été bloqué!",
+        "description": "Title of the notification window when a malicious event is detected"
+    },
+    "notifyAlertMessage": {
+        "message": "$hostname$ a essayé de charger par une demande de $method$ en utilisant un $type$ objet.",
+        "description": "Message to display inside of the notification when a malicious event is detected",
+        "placeholders": {
+            "hostname": {
+                "content": "$1"
+            },
+            "method": {
+                "content": "$2"
+            },
+            "type": {
+                "content": "$3"
+            }
+        }
+    },
+    "warningProceedMessage": {
+        "message": "J’accepte le risque de donner accès
+        temporairement.
+        ",
+        "description": "Hyperlink label displayed that allows a user to access a malicious resource"
+    },
+    "warningLeaveMessage": {
+        "message": "Me faire sortir!",
+        "description": "Hyperlink label displayed to take a user away from the malicious resource"
+    },
+    "warningAlertTitle": {
+        "message": "Site soupçonneux signalé!",
+        "description": "Main label to display to the user when they visit a malicious resource"
+    },
+    "warningAlertMessage": {
+        "message": "Blocage a rapporté  <b>$url$</b> en tant que soupçonneux. Ce site va peut-être faire quelque chose de dangereux comme installer un software ou révéler des informations personnelles (par exemple, mot de passe, numéro de téléphone, ou de cartes de credit). . View the <a class='small-link' data-toggle='collapse' href='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>raw details</a>.",
+        "description": "Detailed message shown to the user when they visit a malicious resource",
+        "placeholders": {
+            "url": {
+                "content": "$1"
+            }
+        }
+    }
+}
