@@ -1,0 +1,161 @@
+{
+    "appName": {
+        "message": "בולקאייד",
+        "description": "Name of the extension as displayed in settings"
+    },
+    "appDesc": {
+        "message": "חוסם גישה לאתרים המכילים נוזקות מהדפדפן",
+        "description": "Description of the extension as displayed in settings"
+    },
+    "dbgNoServer": {
+        "message": "כתובת שרת לא מוגדרת",
+        "description": "Debug message to show when no server URL is defined"
+    },
+    "dbgSavedItems": {
+        "message": "$count$ פריטים נשמרו לארכיון מקומי",
+        "description": "Debug message outlining how many indicators were wrote to local storage",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
+    "dbgProcessedEvents": {
+        "message": "ארועים עובדו ונוקו מקומית.",
+        "description": "Debug message after processing local event alerts"
+    },
+    "dbgNotificationCreated": {
+        "message": "התראה נוצרה",
+        "description": "Debug message after creating a notification"
+    },
+    "dbgEnabed": {
+        "message": "בולקאייד מופעל.",
+        "description": "Debug message shown when extension is enabled"
+    },
+    "dbgDisabled": {
+        "message": "בולקאייד מכובה.",
+        "description": "Debug message shown when extension is disabled"
+    },
+    "dbgBlockBypass": {
+        "message": "בוצעה בקשה למעקף.",
+        "description": "Debug message when a user requests to bypass blocking"
+    },
+    "dbgRawRequest": {
+        "message": "בקשה חדשה: $request$.",
+        "description": "Debug message showing the raw request that was flagged as malicious",
+        "placeholders": {
+            "request": {
+                "content": "$1"
+            }
+        }
+    },
+    "optionsOn" : {
+        "message": "מופעל",
+        "description": "Value to display when a specific option is enabled"
+    },
+    "optionsOff" : {
+        "message": "מכובה",
+        "description": "Value to display when a specific option is disabled"
+    },
+    "optionsServerUrl": {
+        "message": "כתובת שרת",
+        "description": "Label for the server URL option input"
+    },
+    "optionsShowNotifications": {
+        "message": "התראה קופצת",
+        "description": "Label for the notifications option"
+    },
+    "optionsAnalystAssist": {
+        "message": "עזרת אנליסט",
+        "description": "Label for the analyst assist option"
+    },
+    "optionsDebugMode": {
+        "message": "מצב דיבאג",
+        "description": "Label for the debug mode option"
+    },
+    "optionsConfigSaved": {
+        "message": "ההגדרות שלך נשמרו בהצלחה!",
+        "description": "Message to show when the configuration is saved"
+    },
+    "optionsSaveConfig": {
+        "message": "שמור",
+        "description": "Label to save the options configuration"
+    },
+    "optionsServerUrlTooltip": {
+        "message": "כתובת שרת לעיבוד מזהיים של פעילות חשודה או מסוכנת",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsShowNotificationsTooltip": {
+        "message": "הראה התראה על שולחן העבודה כאשר מזוהה פעילות חשודה",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsAnalystAssistTooltip": {
+        "message": "שלח פעילות חשודה ישירות לאנליסטים אשר יספקו עוד מידע על התקיפה",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "optionsDebugModeTooltip": {
+        "message": "הרץ את התוסף עם כל הפלט מופעל בקונסול",
+        "description": "Tooltip data that shows up next to the option label"
+    },
+    "notifyIndicatorSyncTitle": {
+        "message": "שרת מזהים עודכן!",
+        "description": "Title of the notification window when the database updates."
+    },
+    "notifyRequestError": {
+        "message": "$url$ החזיר סטטוס $status$ על הבקשה.",
+        "description": "Message to display inside of the notification when a request for data fails",
+        "placeholders": {
+            "url": {
+                "content": "$1"
+            },
+            "status": {
+                "content": "$2"
+            }
+        }
+    },
+    "notifyRequestErrorTitle": {
+        "message": "כשלון בעדכון מזהה!",
+        "description": "Title of the notification window when a request for data fails"
+    },
+    "notifyAlertTitle": {
+        "message": "פעילות חשודה נחסמה!",
+        "description": "Title of the notification window when a malicious event is detected"
+    },
+    "notifyAlertMessage": {
+        "message": "$hostname$ ניסה להטען באמצעות בקשת $method$ ועם אלמנט מסוג $type$.",
+        "description": "Message to display inside of the notification when a malicious event is detected",
+        "placeholders": {
+            "hostname": {
+                "content": "$1"
+            },
+            "method": {
+                "content": "$2"
+            },
+            "type": {
+                "content": "$3"
+            }
+        }
+    },
+    "warningProceedMessage": {
+        "message": "אני מקבל את הסיכון - אפשר גישה זמנית",
+        "description": "Hyperlink label displayed that allows a user to access a malicious resource"
+    },
+    "warningLeaveMessage": {
+        "message": "קח אותי מפה!",
+        "description": "Hyperlink label displayed to take a user away from the malicious resource"
+    },
+    "warningAlertTitle": {
+        "message": "אתר חשוד דווח!",
+        "description": "Main label to display to the user when they visit a malicious resource"
+    },
+    "warningAlertMessage": {
+        "message": "בלוקייד דיווח כי <b>$url$</b> חשוד. אתר זה עלול לנסות לגרום לך לעשות משהו מסוכן כגון התקנה תוכנה או מסירת פרטים אישיים (סיסמאות, מספרי טלפון, מספרי כרטיסי אשראי). <a class='small-link' data-toggle='collapse' href='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>צפה במידע המקורי</a>.",
+        "description": "Detailed message shown to the user when they visit a malicious resource",
+        "placeholders": {
+            "url": {
+                "content": "$1"
+            }
+        }
+    }
+}
