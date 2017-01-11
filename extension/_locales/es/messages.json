@@ -137,6 +137,10 @@
             }
         }
     },
+    "notifyStatusAlertTitle": {
+        "message": "Estado cambiado!",
+        "description": "Title of the notification window when Blockade is turned on or off"
+    },
     "warningProceedMessage": {
         "message": "Asumo el riesgo, dame acceso temporal",
         "description": "Hyperlink label displayed that allows a user to access a malicious resource"

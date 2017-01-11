@@ -31,11 +31,29 @@ chrome.browserAction.onClicked.addListener(function(tab) {
         chrome.browserAction.setIcon({path: ICON_DARK});
         msg = chrome.i18n.getMessage("dbgDisabled");
         if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        chrome.notifications.create('alert', {
+            type: 'basic',
+            iconUrl: ICON_LARGE,
+            title: chrome.i18n.getMessage("notifyStatusAlertTitle"),
+            message: chrome.i18n.getMessage("dbgDisabled")
+        }, function(notificationId) {
+            msg = chrome.i18n.getMessage("dbgNotificationCreated");
+            if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        });
     } else {
         localStorage.cfg_isRunning = true;
         chrome.browserAction.setIcon({path: ICON_LIGHT});
         msg = chrome.i18n.getMessage("dbgEnabed");
         if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        chrome.notifications.create('alert', {
+            type: 'basic',
+            iconUrl: ICON_LARGE,
+            title: chrome.i18n.getMessage("notifyStatusAlertTitle"),
+            message: chrome.i18n.getMessage("dbgEnabed")
+        }, function(notificationId) {
+            msg = chrome.i18n.getMessage("dbgNotificationCreated");
+            if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        });
     }
 });
 

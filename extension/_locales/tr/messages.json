@@ -89,6 +89,10 @@
         "message": "Veri güncelle hatası!",
         "description": "Title of the notification window when a request for data fails"
     },
+    "notifyStatusAlertTitle": {
+        "message": "Durum değişti!",
+        "description": "Title of the notification window when Blockade is turned on or off"
+    },
     "optionsAnalystAssist": {
         "message": "Analist Yardım",
         "description": "Label for the analyst assist option"

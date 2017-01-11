@@ -1,18 +1,18 @@
 {
     "appName": {
-        "message": "Блокада",
+        "message": "Blockade",
         "description": "Name of the extension as displayed in settings"
     },
     "appDesc": {
-        "message": "Блокирование вредоносных веб сайтов для вашего браузера.",
+        "message": "Bloqueio de acesso a sites maliciosos no navegador.",
         "description": "Description of the extension as displayed in settings"
     },
     "dbgNoServer": {
-        "message": "Не указан URL сервера",
+        "message": "Nenhuma URL de servidor definida",
         "description": "Debug message to show when no server URL is defined"
     },
     "dbgSavedItems": {
-        "message": "$count$ элементов сохранено в локально.",
+        "message": "$count$ items salvos para o armazenamento local.",
         "description": "Debug message outlining how many indicators were wrote to local storage",
         "placeholders": {
             "count": {
@@ -22,27 +22,27 @@
         }
     },
     "dbgProcessedEvents": {
-        "message": "Сообытия были обработаны локально.",
+        "message": "Eventos foram processadoes e removidos localmente.",
         "description": "Debug message after processing local event alerts"
     },
     "dbgNotificationCreated": {
-        "message": "Уведомление создано.",
+        "message": "Notificação criada.",
         "description": "Debug message after creating a notification"
     },
     "dbgEnabed": {
-        "message": "Блокада включена.",
+        "message": "Blockade ativado.",
         "description": "Debug message shown when extension is enabled"
     },
     "dbgDisabled": {
-        "message": "Блокада выключена.",
+        "message": "Blockade desativado.",
         "description": "Debug message shown when extension is disabled"
     },
     "dbgBlockBypass": {
-        "message": "Запрошен обход блокировки.",
+        "message": "Exceção solicitada.",
         "description": "Debug message when a user requests to bypass blocking"
     },
     "dbgRawRequest": {
-        "message": "Исходный запрос: $request$.",
+        "message": "Requisição original: $request$.",
         "description": "Debug message showing the raw request that was flagged as malicious",
         "placeholders": {
             "request": {
@@ -51,59 +51,54 @@
         }
     },
     "optionsOn" : {
-        "message": "Вкл",
+        "message": "ligado",
         "description": "Value to display when a specific option is enabled"
     },
     "optionsOff" : {
-        "message": "Выкл",
+        "message": "desligado",
         "description": "Value to display when a specific option is disabled"
     },
     "optionsServerUrl": {
-        "message": "URL сервера",
+        "message": "URL do Servidor",
         "description": "Label for the server URL option input"
     },
     "optionsShowNotifications": {
-        "message": "Pop-up уведомления",
+        "message": "Notificações de Pop-up",
         "description": "Label for the notifications option"
     },
     "optionsAnalystAssist": {
-        "message": "Помощь Аналитика",
+        "message": "Auxílio de Analista",
         "description": "Label for the analyst assist option"
     },
     "optionsDebugMode": {
-        "message": "Отладочный режим",
+        "message": "Modo de Debug",
         "description": "Label for the debug mode option"
     },
     "optionsConfigSaved": {
-        "message": "Ваша конфигурация была успешно сохранена!",
-        "description": "Message to show when the configuration is saved"
+        "message": "Sua configuração foi salva com sucesso!"
     },
     "optionsSaveConfig": {
-        "message": "Сохранить",
+        "message": "Salvar",
         "description": "Label to save the options configuration"
     },
     "optionsServerUrlTooltip": {
-        "message": "URL сервера корорый будет обрабатыватъ индикаторы на подозрительную или вредоносную активностъ",
+        "message": "URL do servidor que vai analisar indicadores por atividade suspeita ou maliciosa",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsShowNotificationsTooltip": {
-        "message": "Показать уведомления об обнаружении вредоносной активности на экране",
+        "message": "Mostrar notificações no desktop quando um evento malicioso é detectado",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsAnalystAssistTooltip": {
-        "message": "Послать информацию о вредоносных событиях аналитикам которые возможно определят дополнителъные детали атаки",
+        "message": "Enviar eventos maliciosos direto para analistas werificarem mais detalhes sobre o ataque",
         "description": "Tooltip data that shows up next to the option label"
     },
     "optionsDebugModeTooltip": {
-        "message": "Запуститъ плагин с отладочными сообщениями на консоль",
+        "message": "Executar o plugin com os resultados sendo reportados dentro do console",
         "description": "Tooltip data that shows up next to the option label"
     },
-    "notifyIndicatorSyncTitle": {
-        "message": "База индикаторов обновлена!",
-        "description": "Title of the notification window when the database updates."
-    },
     "notifyRequestError": {
-        "message": "$url$ вернул $status$ статус на запрос.",
+        "message": "$url$ retornou o status $status$ ao ser requisitada.",
         "description": "Message to display inside of the notification when a request for data fails",
         "placeholders": {
             "url": {
@@ -115,15 +110,15 @@
         }
     },
     "notifyRequestErrorTitle": {
-        "message": "Ошибка обновления индикатора!",
+        "message": "Falha na atualização de indicadores!",
         "description": "Title of the notification window when a request for data fails"
     },
     "notifyAlertTitle": {
-        "message": "Вредоносный траффик заблокирован!",
+        "message": "Trafego malicioso bloqueado!",
         "description": "Title of the notification window when a malicious event is detected"
     },
     "notifyAlertMessage": {
-        "message": "$hostname$ пытался загрузитъ через $method$ запрос исполъзуя $type$ элемент.",
+        "message": "$hostname$ tentou carregar através da requisição $method$ usando um elemento $type$.",
         "description": "Message to display inside of the notification when a malicious event is detected",
         "placeholders": {
             "hostname": {
@@ -138,23 +133,23 @@
         }
     },
     "notifyStatusAlertTitle": {
-        "message": "Статус изменен!",
+        "message": "Status alterado!",
         "description": "Title of the notification window when Blockade is turned on or off"
     },
     "warningProceedMessage": {
-        "message": "Я принимаю риски, временно разрешить доступ.",
+        "message": "Estou de acordo com os riscos, permita o acesso temporariamente.",
         "description": "Hyperlink label displayed that allows a user to access a malicious resource"
     },
     "warningLeaveMessage": {
-        "message": "Перейти на безопасный ресурс!",
+        "message": "Tire-me daqui!",
         "description": "Hyperlink label displayed to take a user away from the malicious resource"
     },
     "warningAlertTitle": {
-        "message": "Вредоносный веб сайт!",
+        "message": "Site suspeito reportado!",
         "description": "Main label to display to the user when they visit a malicious resource"
     },
     "warningAlertMessage": {
-        "message": "Блокада выявила  <b>$url$</b> сайт как подозрительный. Данный сайт может попытаться заставить вас согласится на действия комрпометирующие вашу безопасность, например попросить ввести ваш пароль, номер телефона или кредитной карты.or <a class='small-link' data-toggle='collapse' href='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>Посмотреть детально</a>.",
+        "message": "Blockade reportou <b>$url$</b> como suspeita. Este website pode tentar enganá-lo para fazer algo perigoso como instalar software ou revelar informações pessoais (por exemplo, senhas, numeros de telefone, ou números de cartão de crédito). Veja os <a class='small-link' data-toggle='collapse' href='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>detalhes técnicos</a>.",
         "description": "Detailed message shown to the user when they visit a malicious resource",
         "placeholders": {
             "url": {

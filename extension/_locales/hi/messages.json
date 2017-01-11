@@ -136,6 +136,10 @@
             }
         }
     },
+    "notifyStatusAlertTitle": {
+        "message": "स्थिति बदल!",
+        "description": "Title of the notification window when Blockade is turned on or off"
+    },
     "warningProceedMessage": {
         "message": "मैं अस्थायी रूप से उपयोग की अनुमति के लिए ख़तरा लेने को तैयार हूँ।",
         "description": "Hyperlink label displayed that allows a user to access a malicious resource"
