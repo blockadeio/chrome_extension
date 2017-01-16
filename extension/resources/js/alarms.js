@@ -7,7 +7,13 @@
  */
 function processEvents() {
     var events = JSON.parse(localStorage.cfg_events);
+    for (var i = events.length -1; i >= 0 ; i--) {
+        if (events[i].indicatorMatch === "test.blockade.io") {
+            events.splice(i, 1);
+        }
+    }
     if (events.length === 0) {
+        localStorage.cfg_events = JSON.stringify([]);
         return false;
     }
 

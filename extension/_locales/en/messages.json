@@ -161,5 +161,37 @@
                 "content": "$1"
             }
         }
+    },
+    "setupTitle": {
+        "message": "Congratulations, you did it!",
+        "description": "Title to show on the setup page"
+    },
+    "setupCore": {
+        "message": "Blockade requires no user interaction to operate and automatically updates as you browse the Internet. If Blockade detects a suspicious page, it will block it and notify you.",
+        "description": "Setup message letting the user know what to expect"
+    },
+    "setupQ1": {
+        "message": "That's it?",
+        "description": "Second setup message for more information"
+    },
+    "setupA1": {
+        "message": "Totally! Going forward, you can find additional configuration settings on the <a href='options.html'>options page</a>. If you ever need to disable Blockade, just click the icon on the top-right corner! Still have questions? You can learn more about Blockade <a href='https://www.blockade.io/'>here</a>.",
+        "description": "Secondary message explaining where to get more information about the extension"
+    },
+    "setupSyncing": {
+        "message": "Syncing database with cloud node...",
+        "description": "Message to display when getting indicators"
+    },
+    "demoTitle": {
+        "message": "This is a demo!",
+        "description": "Title of the demo page"
+    },
+    "demoP1": {
+        "message": "<p>If Blockade is configured properly, you should have seen a pop-up notification in the top-right corner. Messages inside of these notifications give you more information about what was blocked.</p>",
+        "description": "Message to show within the demo page, paragraph one."
+    },
+    "demoP2": {
+        "message": "<p>For this demo page, we blocked the above image from loading. If you are able to see this image, then something went wrong. Consider reinstalling Blockade or file an issue <a href='https://github.com/blockadeio/chrome_extension/issues'>here</a>.</p>",
+        "description": "Message to show within the demo page, paragraph two."
     }
 }

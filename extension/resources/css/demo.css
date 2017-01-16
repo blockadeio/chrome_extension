@@ -1,0 +1,64 @@
+body {
+    background-color: #f7931e;
+}
+.main {
+    height: 400px;
+    width: 500px;
+    position: fixed;
+    top: 25%;
+    left: 45%;
+    margin-top: -100px;
+    margin-left: -200px;
+    color: white;
+}
+
+.small-link{
+    color: white;
+    text-decoration : none;
+    text-align: center;
+}
+
+div.a#proceed {
+    text-align: center;
+}
+h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.4px;
+    padding-bottom: 20px;
+}
+p {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 200;
+    line-height: 25px;
+    padding-bottom: 15px;
+}
+button {
+    width: 100%;
+}
+.go-back {
+    text-transform: uppercase;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+}
+#proceed {
+    color: white;
+    text-decoration : none;
+    text-align: center;
+    font-size: 12px;
+}
+.glyphicon {
+    font-size: 75px;
+}
+.logo {
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+}
