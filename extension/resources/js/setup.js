@@ -9,6 +9,7 @@ function populate_setup() {
     chrome.alarms.create("databaseUpdate",
                          {delayInMinutes: 0.1, periodInMinutes: 0.1});
     var statusCheck = setInterval(function () {
+        document.getElementById('loading').style.visibility = "hidden";
         var msg = "All done! <a href='demo.html' class='test'>Test extension</a>.";
         if (parseInt(localStorage.cfg_lastIndicatorCount) > 0) {
             document.getElementById("status").innerHTML = msg;
@@ -17,5 +18,4 @@ function populate_setup() {
         }
     }, 1000);
 }
-
 document.addEventListener('DOMContentLoaded', populate_setup);
