@@ -42,76 +42,52 @@ function processEvents() {
  * subset of the entire indicator definition.
  */
 function databaseUpdate() {
-    if (localStorage.cfg_cloudUrl === "") {
+    var channels = JSON.parse(localStorage.cfg_channels);
+    if (channels.length === 0) {
         msg = chrome.i18n.getMessage("dbgNoServer");
         if (localStorage.cfg_debug === 'true') { console.log(msg); }
         return false;
     }
     localStorage.cfg_isRunning = true;
-    var url = localStorage.cfg_cloudUrl + 'get-indicators';
-    console.log("ACTIVE", BlockadeIO.active);
-    return true;
 
-    $.ajax({
-        url: url,
-        type: 'get',
-        success: function(data) {
-            if (!data.success) {
-                return false;
-            }
-            // First time we get data, we are set to run less frequently
-            if (localStorage.cfg_firstSync) {
-                if (data.indicatorCount > 0) {
-                    localStorage.cfg_firstSync = false;
-                    localStorage.cfg_dbUpdateTime = 15;
-                }
-            }
-            // Purge the old data out.
-            for (var i=0; i < localStorage.length; i++) {
-                var kname = localStorage.key(i);
-                if (kname.startsWith("cfg_")) {
-                    continue;
-                }
-                localStorage.removeItem(kname);
-            }
-            // Load everything back in
-            var indicators = data.indicators;
-            for (var key in indicators) {
-                localStorage[key] = JSON.stringify(indicators[key]);
-            }
-            // localStorage.cfg_indicators = JSON.stringify(data);
-            var msg = chrome.i18n.getMessage("dbgSavedItems",
-                                            [data.indicatorCount]);
-            if (data.indicatorCount >
-                    parseInt(localStorage.cfg_lastIndicatorCount)) {
-                if (localStorage.cfg_notifications === 'true') {
-                    chrome.notifications.create('info', {
-                        type: 'basic',
-                        iconUrl: ICON_LARGE,
-                        title: chrome.i18n.getMessage("notifyIndicatorSyncTitle"),
-                        message: msg
-                    }, function(notificationId) {
-                        msg = chrome.i18n.getMessage("dbgNotificationCreated");
-                        if (localStorage.cfg_debug === 'true') { console.log(msg); }
-                    });
-                }
-            }
-            localStorage.cfg_lastIndicatorCount = data.indicatorCount;
-            if (localStorage.cfg_debug === 'true') { console.log(msg); }
-        },
-        error: function(data) {
-            var message = chrome.i18n.getMessage("notifyRequestError",
-                                                 [url, data.status]);
-            chrome.notifications.create('alert', {
-                type: 'basic',
-                iconUrl: ICON_LARGE,
-                title: chrome.i18n.getMessage("notifyRequestErrorTitle"),
-                message: message
-            }, function(notificationId) {
-                msg = chrome.i18n.getMessage("dbgNotificationCreated");
-                if (localStorage.cfg_debug === 'true') { console.log(msg); }
-            });
+    var promises = [];
+    for (var i=0; i < channels.length; i++) {
+        promises.push(fetch(channels[i].url + 'get-indicators'));
+    }
+    Promise
+    .all(promises)
+    .then(function(response) {
+        var blobs = [];
+        for (var i=0; i < response.length; i++) {
+            blobs.push(response[i].json());
         }
+        return Promise.all(blobs);
+    })
+    .then(function(blobs) {
+        console.log(blobs);
+        for (var i=0; i < blobs.length; i++) {
+            if (!blobs[i].success) {
+                continue;
+            }
+            // Promises should return in order
+            blobs[i].source = channels[i].url;
+            BlockadeIO.addSource(blobs[i]);
+        }
+        BlockadeIO.finalize();
+    })
+    .catch(function(error) {
+        console.log(error);
+        var message = chrome.i18n.getMessage("notifyRequestError",
+                                             [url, error.message]);
+        chrome.notifications.create('alert', {
+            type: 'basic',
+            iconUrl: ICON_LARGE,
+            title: chrome.i18n.getMessage("notifyRequestErrorTitle"),
+            message: message
+        }, function(notificationId) {
+            msg = chrome.i18n.getMessage("dbgNotificationCreated");
+            if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        });
     });
 }
 
@@ -131,6 +107,5 @@ if (localStorage.cfg_configured === 'true') {
     chrome.alarms.create("processEvents",
                          {delayInMinutes: 0.1, periodInMinutes: 0.5});
     var frequency = parseInt(localStorage.cfg_dbUpdateTime);
-    chrome.alarms.create("databaseUpdate",
-                         {delayInMinutes: 0.1, periodInMinutes: frequency});
+    chrome.alarms.create("databaseUpdate", {periodInMinutes: frequency});
 }

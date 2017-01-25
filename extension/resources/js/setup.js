@@ -15,6 +15,9 @@ function populate_setup() {
             document.getElementById("status").innerHTML = msg;
             localStorage.cfg_configured = true;
             clearInterval(statusCheck);
+            var frequency = parseInt(localStorage.cfg_dbUpdateTime);
+            chrome.alarms.create("databaseUpdate", {periodInMinutes: frequency});
+            chrome.alarms.clear("setupWait");
         }
     }, 1000);
 }

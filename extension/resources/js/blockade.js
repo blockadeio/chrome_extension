@@ -1,4 +1,3 @@
-console.log(LZMA);
 var BlockadeIO = {
     indicatorCount: 0,
     indicators: null,
@@ -7,7 +6,7 @@ var BlockadeIO = {
     init: function() {
         if (localStorage.getItem("indicators") !== null) {
             console.log("Loading signatures from storage");
-            LZMA.decompress(localStorage.indicators, function(decoded, error) {
+            LZMA.decompress(localStorage.cfg_indicators, function(decoded, error) {
                 BlockadeIO.indicators = JSON.parse(decoded);
                 BlockadeIO.active = true;
             });
@@ -15,10 +14,14 @@ var BlockadeIO = {
     },
 
     addSource: function(data) {
+        if (localStorage.cfg_debug === 'true') {
+            console.log("Added source:", data);
+        }
         BlockadeIO.sources.push(data);
     },
 
     finalize: function() {
+        if (localStorage.cfg_debug === 'true') { console.log("Finalizing"); }
         var indicators = {};
         for (var i=0; i < BlockadeIO.sources.length; i++) {
             var data = BlockadeIO.sources[i];
@@ -29,31 +32,45 @@ var BlockadeIO = {
                 } else {
                     indicators[item] = [data.source];
                 }
+                indicators[item] = uniq(indicators[item]);
             }
         }
+        if (localStorage.cfg_debug === 'true') { console.log(indicators); }
         var store = JSON.stringify(indicators);
         LZMA.compress(store, 1, function(encoded, error) {
-            localStorage.indicators = encoded;
+            if (localStorage.cfg_debug === 'true') { console.log("Compressing"); }
+            localStorage.cfg_indicators = encoded;
         });
         BlockadeIO.indicatorCount = Object.keys(indicators).length;
         BlockadeIO.indicators = indicators;
         BlockadeIO.active = true;
+        if (localStorage.cfg_firstSync) {
+            if (BlockadeIO.indicatorCount > 0) {
+                localStorage.cfg_firstSync = false;
+                localStorage.cfg_dbUpdateTime = 15;
+            }
+        }
+        var msg = chrome.i18n.getMessage("dbgSavedItems",
+                                        [BlockadeIO.indicatorCount]);
+        if (BlockadeIO.indicatorCount >
+                parseInt(localStorage.cfg_lastIndicatorCount)) {
+            if (localStorage.cfg_notifications === 'true') {
+                chrome.notifications.create('info', {
+                    type: 'basic',
+                    iconUrl: ICON_LARGE,
+                    title: chrome.i18n.getMessage("notifyIndicatorSyncTitle"),
+                    message: msg
+                }, function(notificationId) {
+                    msg = chrome.i18n.getMessage("dbgNotificationCreated");
+                    if (localStorage.cfg_debug === 'true') { console.log(msg); }
+                });
+            }
+        }
+        localStorage.cfg_lastIndicatorCount = BlockadeIO.indicatorCount;
+        if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        var frequency = parseInt(localStorage.cfg_dbUpdateTime);
+        chrome.alarms.create("databaseUpdate", {periodInMinutes: frequency});
         return true;
     }
 
 };
-
-BlockadeIO.init();
-
-// console.log(BlockadeIO);
-// $.ajax({
-//     url: localStorage.cfg_cloudUrl + 'get-indicators',
-//     type: 'get',
-//     success: function(data) {
-//         if (!data.success) {
-//             return false;
-//         }
-//         BlockadeIO.addSource(data);
-//         console.log(BlockadeIO.finalize());
-//     }
-// });

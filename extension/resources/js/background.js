@@ -2,6 +2,7 @@
  * Functions to run once the extension has been loaded.
  */
 
+BlockadeIO.init();
 var parser = document.createElement('a');
 var pattern = new RegExp(/\bLTBYPASS-[0-9]{5}\b/g);
 var bypass = /#LTBYPASS-[0-9]{5}/;
@@ -14,14 +15,17 @@ var bypass = /#LTBYPASS-[0-9]{5}/;
         localStorage.cfg_debug = false;
         localStorage.cfg_notifications = true;
         localStorage.cfg_feedback = true;
-        localStorage.cfg_cloudUrl = DEFAULT_NODE;
         localStorage.cfg_isRunning = true;
         localStorage.cfg_configured = false;
         localStorage.cfg_lastIndicatorCount = 0;
         localStorage.cfg_firstSync = true;
         localStorage.cfg_init = true;
         localStorage.cfg_dbUpdateTime = 5;
-        localStorage.cfg_channels = JSON.stringify([]);
+        localStorage.cfg_channels = JSON.stringify([{
+            id: 0,
+            url: 'https://api.blockade.io/',
+            contact: ''
+        }]);
         chrome.tabs.create({'url': SETUP_PAGE});
     }
 })();
@@ -63,7 +67,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         var hashed, indicators;
         var debug = localStorage.cfg_debug === 'true';
         var isRunning = localStorage.cfg_isRunning === 'true';
-        if (!(isRunning)) {
+        if (!(isRunning) || !(BlockadeIO.active)) {
             return {cancel: false};
         }
         parser.href = data.url;

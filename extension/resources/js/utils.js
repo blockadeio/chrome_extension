@@ -26,3 +26,10 @@ function removeArrayItem(arr, value) {
     }
     return arr;
 }
+
+function uniq(a) {
+    var seen = {};
+    return a.filter(function(item) {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
+}

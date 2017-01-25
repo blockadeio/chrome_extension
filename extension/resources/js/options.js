@@ -1,17 +1,5 @@
 function save_options() {
     $('#save').toggleClass('btn-primary').toggleClass('btn-success');
-    var input_fields = ['cfg_cloudUrl'];
-    var i, field, value, select_fields;
-    for (i = 0; i < input_fields.length; i++) {
-        field = input_fields[i];
-        value = document.getElementById(field).value;
-        value = addProtocol(value);
-        if (value.slice(-1) !== "/") {
-            value += "/";
-        }
-        localStorage[field] = value;
-    }
-
     select_fields = ['cfg_debug', 'cfg_notifications', 'cfg_feedback'];
     for (i = 0; i < select_fields.length; i++) {
         var radio = document.getElementsByName(select_fields[i]);
@@ -26,9 +14,8 @@ function save_options() {
     // Kick-off alarms to perform an update on the indicators
     chrome.alarms.create("processEvents",
                          {delayInMinutes: 0.1, periodInMinutes: 0.5});
-    var frequency = parseInt(localStorage.cfg_dbUpdateTime);
     chrome.alarms.create("databaseUpdate",
-                         {delayInMinutes: 0.1, periodInMinutes: frequency});
+                         {delayInMinutes: 0.1, periodInMinutes: 1.0});
     localStorage.cfg_configured = true;
 
     // Update status to let user know options were saved.
@@ -42,13 +29,6 @@ function save_options() {
 
 // Restores select box state to saved value from localStorage.
 function restore_options() {
-    var input_fields = ['cfg_cloudUrl'];
-    var i, field;
-    for (i = 0; i < input_fields.length; i++) {
-        field = input_fields[i];
-        document.getElementById(field).value = localStorage[field];
-    }
-
     var select_fields = ['cfg_debug', 'cfg_notifications', 'cfg_feedback'];
     for (i = 0; i < select_fields.length; i++) {
         var radio = document.getElementsByName(select_fields[i]);
@@ -124,6 +104,8 @@ function add_node() {
     localStorage.cfg_channels = JSON.stringify(channels);
     document.getElementById('cfg_cloudUrl').value = '';
     document.getElementById('cfg_contact').value = '';
+    chrome.alarms.create("databaseUpdate",
+                         {delayInMinutes: 0.1, periodInMinutes: 1.0});
     location.reload();
 }
 
