@@ -4,9 +4,10 @@ var BlockadeIO = {
     sources: [],
 
     init: function() {
-        if (localStorage.getItem("indicators") !== null) {
+        if (localStorage.getItem("cfg_indicators") !== null) {
             console.log("Loading signatures from storage");
-            LZMA.decompress(localStorage.cfg_indicators, function(decoded, error) {
+            var data = JSON.parse(localStorage.cfg_indicators);
+            LZMA.decompress(data, function(decoded, error) {
                 BlockadeIO.indicators = JSON.parse(decoded);
                 BlockadeIO.active = true;
             });
@@ -39,7 +40,7 @@ var BlockadeIO = {
         var store = JSON.stringify(indicators);
         LZMA.compress(store, 1, function(encoded, error) {
             if (localStorage.cfg_debug === 'true') { console.log("Compressing"); }
-            localStorage.cfg_indicators = encoded;
+            localStorage.cfg_indicators = JSON.stringify(encoded);
         });
         BlockadeIO.indicatorCount = Object.keys(indicators).length;
         BlockadeIO.indicators = indicators;
