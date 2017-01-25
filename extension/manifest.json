@@ -15,7 +15,8 @@
     },
     "options_page": "resources/static/options.html",
     "permissions": ["tabs", "http://*/", "https://*/", "webRequest",
-                    "webRequestBlocking", "alarms", "notifications"],
+                    "webRequestBlocking", "alarms", "notifications",
+                    "unlimitedStorage"],
     "background": {
         "scripts": ["resources/external/jquery.js", "resources/external/md5.js",
                     "resources/js/utils.js", "resources/js/const.js",

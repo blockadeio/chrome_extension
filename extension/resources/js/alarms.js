@@ -49,6 +49,7 @@ function databaseUpdate() {
     }
     localStorage.cfg_isRunning = true;
     var url = localStorage.cfg_cloudUrl + 'get-indicators';
+   console.log("HELLO", iamglobal);
 
     $.ajax({
         url: url,
@@ -57,7 +58,6 @@ function databaseUpdate() {
             if (!data.success) {
                 return false;
             }
-
             // First time we get data, we are set to run less frequently
             if (localStorage.cfg_firstSync) {
                 if (data.indicatorCount > 0) {
@@ -65,12 +65,20 @@ function databaseUpdate() {
                     localStorage.cfg_dbUpdateTime = 15;
                 }
             }
-
+            // Purge the old data out.
+            for (var i=0; i < localStorage.length; i++) {
+                var kname = localStorage.key(i);
+                if (kname.startsWith("cfg_")) {
+                    continue;
+                }
+                localStorage.removeItem(kname);
+            }
+            // Load everything back in
             var indicators = data.indicators;
             for (var key in indicators) {
                 localStorage[key] = JSON.stringify(indicators[key]);
             }
-            localStorage.cfg_indicators = JSON.stringify(data);
+            // localStorage.cfg_indicators = JSON.stringify(data);
             var msg = chrome.i18n.getMessage("dbgSavedItems",
                                             [data.indicatorCount]);
             if (data.indicatorCount >
