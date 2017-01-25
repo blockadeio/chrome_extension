@@ -49,7 +49,8 @@ function databaseUpdate() {
     }
     localStorage.cfg_isRunning = true;
     var url = localStorage.cfg_cloudUrl + 'get-indicators';
-   console.log("HELLO", iamglobal);
+    console.log("ACTIVE", BlockadeIO.active);
+    return true;
 
     $.ajax({
         url: url,

@@ -21,6 +21,7 @@ var bypass = /#LTBYPASS-[0-9]{5}/;
         localStorage.cfg_firstSync = true;
         localStorage.cfg_init = true;
         localStorage.cfg_dbUpdateTime = 5;
+        localStorage.cfg_channels = JSON.stringify([]);
         chrome.tabs.create({'url': SETUP_PAGE});
     }
 })();

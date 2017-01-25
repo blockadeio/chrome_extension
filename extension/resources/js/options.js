@@ -58,10 +58,78 @@ function restore_options() {
             }
         }
     }
+
+    var channels = JSON.parse(localStorage.cfg_channels);
+    var rows = [];
+    for (i = 0; i < channels.length; i++) {
+        var columns = [];
+        columns.push($('<td/>').append(channels[i].url));
+        columns.push($('<td/>').append(channels[i].contact));
+        var btn = $('<button/>', {
+            class: 'btn btn-xs btn-danger remove-node',
+            text: '-',
+            id: channels[i].id
+        });
+        columns.push($('<td/>').append(btn));
+        var row = $('<tr/>').append(columns);
+        rows.push(row);
+    }
+    $("tbody#nodes").empty().append(rows);
+    $('.remove-node').click(function(item) {
+        for (i = 0; i < channels.length; i++) {
+            if (channels[i].id !== parseInt(this.id)) {
+                continue;
+            }
+            channels.splice(i, 1);
+            localStorage.cfg_channels = JSON.stringify(channels);
+            location.reload();
+        }
+    });
+}
+
+function add_node() {
+    var url = document.getElementById('cfg_cloudUrl').value;
+    if (url === '') {
+        var error = document.getElementById("error_message");
+        error.innerHTML = "Address can't be blank.";
+        setTimeout(function() {
+            error.innerHTML = "";
+        }, 3000);
+        return false;
+    }
+    url = addProtocol(url);
+    if (url.slice(-1) !== "/") {
+        url += "/";
+    }
+    var contact = document.getElementById('cfg_contact').value;
+    if (contact.indexOf('@') === -1 && contact !== '') {
+        var error = document.getElementById("error_message");
+        error.innerHTML = "Email was invalid.";
+        setTimeout(function() {
+            error.innerHTML = "";
+        }, 3000);
+        return false;
+    }
+    var channels = JSON.parse(localStorage.cfg_channels);
+    var result = $.grep(channels, function(e){ return e.url == url; });
+    if (result.length > 0) {
+        var error = document.getElementById("error_message");
+        error.innerHTML = "Address is already used.";
+        setTimeout(function() {
+            error.innerHTML = "";
+        }, 3000);
+        return false;
+    }
+    channels.push({'id': channels.length, 'url': url, 'contact': contact});
+    localStorage.cfg_channels = JSON.stringify(channels);
+    document.getElementById('cfg_cloudUrl').value = '';
+    document.getElementById('cfg_contact').value = '';
+    location.reload();
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);
 document.querySelector('#save').addEventListener('click', save_options);
+document.querySelector('#add_node').addEventListener('click', add_node);
 document.getElementById("serverUrl").innerHTML = chrome.i18n.getMessage("optionsServerUrl");
 document.getElementById("showNotifications").innerHTML = chrome.i18n.getMessage("optionsShowNotifications");
 document.getElementById("analystAssist").innerHTML = chrome.i18n.getMessage("optionsAnalystAssist");
@@ -82,3 +150,5 @@ for (var j = 0, length = offElements.length; j < length; j++) {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
+
+

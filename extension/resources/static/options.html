@@ -24,7 +24,18 @@
                 <legend><span id="serverUrl"></span>
                     <span id="optionsServerUrlTooltip" class="glyphicon glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title=""></span>
                 </legend>
-                <input type="text" width="200" id="cfg_cloudUrl"><br><br>
+                <div>
+                    <input type="text" width="200" id="cfg_cloudUrl" placeholder="Cloud address">
+                    <input type="text" width="200" id="cfg_contact" placeholder="Optional contact email">
+                    <button id="add_node" class="btn btn-xs btn-success">+</button>
+                </div>
+                <div id="error_message"></div>
+                <br>
+                <div id="node-wrapper">
+                    <table class="table table-condensed">
+                        <tbody id="nodes"></tbody>
+                    </table>
+                </div>
 
                 <legend><span id="showNotifications"></span>
                     <span id="optionsShowNotificationsTooltip" class="glyphicon glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title=""></span>

@@ -1,16 +1,20 @@
-*   { margin:0; padding:0; }
+*   {
+    margin:0;
+    padding:0;
+    .border-radius(0) !important;
+}
 body {
     overflow-y:scroll !important;
     font:13px/1.5 Helvetica,arial,sans-serif;
-    background: #FFF;
+    background: #3B5998;
 }
 a   { text-decoration:none; }
 
-input[type=text] {width: 100%;}
+input[type=text] {width: 40%;}
 
 #wrapper {
-    /*width:550px; margin:40px auto 80px auto;*/
-    border: 1px solid #fff; -webkit-box-shadow: #404040 0 5px 10px;
+    width:550px; margin:40px auto 80px auto;
+    border: 1px solid #000;
     background-color:#FFF;
     -webkit-border-radius:5px;
 }
@@ -29,7 +33,7 @@ input[type=text] {width: 100%;}
     text-indent: 10px;
     font-size: 16px;
     font-weight: 400;
-    color: #5d758a;
+    color: #000;
     text-shadow: 0 1px 0 #fff;
     font-weight: bold;
 }
@@ -49,7 +53,7 @@ input[type=text] {width: 100%;}
     margin-bottom:20px; padding: 10px;
 }
 #options fieldset legend{
-    color: #999;
+    color: #000;
     font-size: 15px;
     padding: 0 5px;
 }
@@ -152,4 +156,8 @@ input[type=text] {width: 100%;}
 
 .notify a:hover {
     text-decoration: underline;
+}
+#error_message {
+    padding-top: 5px;
+    color: red;
 }
