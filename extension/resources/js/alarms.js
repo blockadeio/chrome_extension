@@ -70,7 +70,7 @@ function databaseUpdate() {
                 continue;
             }
             // Promises should return in order
-            blobs[i].source = channels[i].url;
+            blobs[i].source = channels[i].id;
             BlockadeIO.addSource(blobs[i]);
         }
         BlockadeIO.finalize();
