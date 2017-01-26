@@ -19,8 +19,10 @@
                     "unlimitedStorage"],
     "background": {
         "scripts": ["resources/external/jquery.js", "resources/external/md5.js",
-                    "resources/external/lzma-worker.min.js",
-                    "resources/js/utils.js", "resources/js/blockade.js",
+                    "resources/external/socket.io.min.js",
+                    "resources/js/libs/socket-manager.js",
+                    "resources/js/libs/blockade-socket-manager.js",
+                    "resources/js/utils.js", "resources/js/libs/blockade.js",
                     "resources/js/const.js", "resources/js/alarms.js",
                     "resources/js/background.js"],
         "persistent": true
