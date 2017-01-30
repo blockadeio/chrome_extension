@@ -1,3 +1,6 @@
+/**
+ * Initialize our global space with a couple setup content and shared resources.
+ */
 (function() {
     if (typeof localStorage.cfg_init === "undefined") {
         localStorage.cfg_events = JSON.stringify([]);
@@ -20,3 +23,7 @@
         chrome.tabs.create({'url': SETUP_PAGE});
     }
 })();
+
+var parser = document.createElement('a');
+var pattern = new RegExp(/\bLTBYPASS-[0-9]{5}\b/g);
+var bypass = /#LTBYPASS-[0-9]{5}/;

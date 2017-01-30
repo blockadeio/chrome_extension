@@ -37,7 +37,8 @@ function processEvents() {
             }
             matchedEvents.push(events[j]);
         }
-        var properties = {method: "POST", body: JSON.stringify({'events': events}),
+        var properties = {method: "POST",
+                          body: JSON.stringify({'events': events}),
                           headers: {"Content-Type": "application/json"}};
         promises.push(fetch(channels[i].url + 'send-events', properties));
     }
@@ -57,7 +58,7 @@ function processEvents() {
     })
     .catch(function(error) {
         var message = chrome.i18n.getMessage("notifyRequestError",
-                                             [url, error.message]);
+                                             ["URL", error.message]);
         chrome.notifications.create('alert', {
             type: 'basic',
             iconUrl: ICON_LARGE,
@@ -112,9 +113,8 @@ function databaseUpdate() {
         blockade.finalize();
     })
     .catch(function(error) {
-        console.log(error);
         var message = chrome.i18n.getMessage("notifyRequestError",
-                                             [url, error.message]);
+                                             ['URL', error.message]);
         chrome.notifications.create('alert', {
             type: 'basic',
             iconUrl: ICON_LARGE,
@@ -124,6 +124,7 @@ function databaseUpdate() {
             msg = chrome.i18n.getMessage("dbgNotificationCreated");
             if (localStorage.cfg_debug === 'true') { console.log(msg); }
         });
+        localStorage.cfg_lastIndicatorCount = -1;
     });
 }
 

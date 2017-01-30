@@ -1,15 +1,10 @@
 /**
- * Functions to run once the extension has been loaded.
+ * Core logic for the extensions inspection and blocking capabilities.
  */
-var parser = document.createElement('a');
-var pattern = new RegExp(/\bLTBYPASS-[0-9]{5}\b/g);
-var bypass = /#LTBYPASS-[0-9]{5}/;
-
 if (localStorage.cfg_configured === 'true') {
     chrome.alarms.create("processEvents",
                          {delayInMinutes: 0.1, periodInMinutes: 0.5});
 }
-
 
 chrome.browserAction.onClicked.addListener(function(tab) {
     if (localStorage.cfg_isRunning === 'true') {

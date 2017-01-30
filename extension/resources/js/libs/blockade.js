@@ -1,3 +1,8 @@
+/**
+ * This object handles the in-memory processing of the indicators and housekeeping
+ * for the core aspects of the extension. Without this object, the extension
+ * has no ability to perform look-ups.
+ */
 var BlockadeIO = function() {
     var self = this;
     self.indicatorCount = 0;
@@ -5,6 +10,10 @@ var BlockadeIO = function() {
     self.sources = [];
     self.active = false;
 
+    /**
+     * Attempt to load indicators from local storage or grab remotely.
+     * @return null
+     */
     self.init = function() {
         if (localStorage.getItem("cfg_indicators") !== "{}") {
             console.log(localStorage.cfg_indicators);
@@ -24,10 +33,19 @@ var BlockadeIO = function() {
         }
     };
 
+    /**
+     * Remove an indicator from the in-memory database one-time.
+     * @param  {string} indicator Indicator to remove from the database
+     * @return null
+     */
     self.whitelistItem = function(indicator) {
         delete self.indicators[indicator];
     };
 
+    /**
+     * Add data collected from cloud nodes to a temporary hold before processing.
+     * @param null
+     */
     self.addSource = function(data) {
         if (localStorage.cfg_debug === 'true') {
             console.log("Added source:", data);
@@ -35,8 +53,11 @@ var BlockadeIO = function() {
         self.sources.push(data);
     };
 
+    /**
+     * Merge all the data into a memory-lookup and attempt to save locally.
+     * @return null
+     */
     self.finalize = function() {
-        if (localStorage.cfg_debug === 'true') { console.log("Finalizing"); }
         var indicators = {};
         for (var i=0; i < self.sources.length; i++) {
             var data = self.sources[i];
@@ -50,9 +71,9 @@ var BlockadeIO = function() {
                 indicators[item] = uniq(indicators[item]);
             }
         }
-        if (localStorage.cfg_debug === 'true') { console.log(indicators); }
-        var store = JSON.stringify(indicators);
-        LZMA.compress(store, 1, function(encoded, error) {
+
+        // Attempt to save the database locally (5MB limits)
+        LZMA.compress(JSON.stringify(indicators), 1, function(encoded, error) {
             if (localStorage.cfg_debug === 'true') { console.log("Compressing"); }
             try {
                 localStorage.cfg_indicators = JSON.stringify(encoded);
@@ -63,15 +84,19 @@ var BlockadeIO = function() {
             }
         });
 
+        // Prime the in-memory concepts
         self.indicatorCount = Object.keys(indicators).length;
+        localStorage.cfg_lastIndicatorCount = self.indicatorCount;
         self.indicators = indicators;
         self.active = true;
+        self.sources = [];
         if (localStorage.cfg_firstSync) {
             if (self.indicatorCount > 0) {
                 localStorage.cfg_firstSync = false;
                 localStorage.cfg_dbUpdateTime = 15;
             }
         }
+
         var msg = chrome.i18n.getMessage("dbgSavedItems",
                                         [self.indicatorCount]);
         if (self.indicatorCount >
@@ -88,14 +113,11 @@ var BlockadeIO = function() {
                 });
             }
         }
-        localStorage.cfg_lastIndicatorCount = self.indicatorCount;
-        if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        // Reduce the update frequency now that the database is fully setup
         var frequency = parseInt(localStorage.cfg_dbUpdateTime);
         chrome.alarms.create("databaseUpdate", {periodInMinutes: frequency});
-        return true;
     };
 };
 
 var blockade = new BlockadeIO();
 blockade.init();
-console.log(blockade);

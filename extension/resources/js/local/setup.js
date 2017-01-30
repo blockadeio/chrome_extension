@@ -9,8 +9,9 @@ function populate_setup() {
     chrome.alarms.create("databaseUpdate",
                          {delayInMinutes: 0.1, periodInMinutes: 5});
     var statusCheck = setInterval(function () {
-        var msg = "All done! <a href='demo.html' class='test'>Test extension</a>.";
+        var msg;
         if (parseInt(localStorage.cfg_lastIndicatorCount) > 0) {
+            msg = "All done! <a href='demo.html' class='test'>Test extension</a>.";
             document.getElementById('loading').style.visibility = "hidden";
             document.getElementById("status").innerHTML = msg;
             localStorage.cfg_configured = true;
@@ -18,6 +19,13 @@ function populate_setup() {
             var frequency = parseInt(localStorage.cfg_dbUpdateTime);
             chrome.alarms.create("databaseUpdate", {periodInMinutes: frequency});
             chrome.alarms.clear("setupWait");
+        }
+
+        if (parseInt(localStorage.cfg_lastIndicatorCount) === -1) {
+            msg = "Hmm, we're having issues connecting to the cloud nodes. Please check your Internet connection and the nodes configured in the <a href='options.html'>options page</a>.";
+            document.getElementById('loading').style.visibility = "hidden";
+            document.getElementById("status").innerHTML = msg;
+            localStorage.cfg_configured = true;
         }
     }, 1000);
 }
