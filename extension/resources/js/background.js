@@ -1,34 +1,15 @@
 /**
  * Functions to run once the extension has been loaded.
  */
-
-BlockadeIO.init();
 var parser = document.createElement('a');
 var pattern = new RegExp(/\bLTBYPASS-[0-9]{5}\b/g);
 var bypass = /#LTBYPASS-[0-9]{5}/;
 
+if (localStorage.cfg_configured === 'true') {
+    chrome.alarms.create("processEvents",
+                         {delayInMinutes: 0.1, periodInMinutes: 0.5});
+}
 
-(function() {
-    if (typeof localStorage.cfg_init === "undefined") {
-        localStorage.cfg_events = JSON.stringify([]);
-        localStorage.cfg_indicators = JSON.stringify({});
-        localStorage.cfg_debug = false;
-        localStorage.cfg_notifications = true;
-        localStorage.cfg_feedback = true;
-        localStorage.cfg_isRunning = true;
-        localStorage.cfg_configured = false;
-        localStorage.cfg_lastIndicatorCount = 0;
-        localStorage.cfg_firstSync = true;
-        localStorage.cfg_init = true;
-        localStorage.cfg_dbUpdateTime = 5;
-        localStorage.cfg_channels = JSON.stringify([{
-            id: 0,
-            url: 'https://api.blockade.io/',
-            contact: ''
-        }]);
-        chrome.tabs.create({'url': SETUP_PAGE});
-    }
-})();
 
 chrome.browserAction.onClicked.addListener(function(tab) {
     if (localStorage.cfg_isRunning === 'true') {
@@ -67,33 +48,23 @@ chrome.webRequest.onBeforeRequest.addListener(
         var hashed, indicators;
         var debug = localStorage.cfg_debug === 'true';
         var isRunning = localStorage.cfg_isRunning === 'true';
-        if (!(isRunning) || !(BlockadeIO.active)) {
+        if (!(isRunning) || !(blockade.active)) {
             return {cancel: false};
         }
         parser.href = data.url;
         var hostname = parser.hostname;
         hashed = md5(hostname);
-        var twoBit = hashed.substring(0,2);
 
         if (pattern.exec(parser.hash)) {
             msg = chrome.i18n.getMessage("dbgBlockBypass");
             if (debug) { console.log(msg); }
             data.url = data.url.replace(bypass, '');
-            localStorage.removeItem(hostname);
-            indicators = JSON.parse(localStorage[twoBit]);
-            indicators = removeArrayItem(indicators, hashed);
-            localStorage[twoBit] = JSON.stringify(indicators);
+            blockade.whitelistItem(hashed);
             return {redirectUrl: data.url};
         }
 
-        try {
-            indicators = JSON.parse(localStorage[twoBit]);
-        } catch(err) {
-            // Fail to parse means no key, so bounce out.
-            return {cancel: false};
-        }
-
-        if (indicators.indexOf(hashed) == -1) {
+        indicators = blockade.indicators;
+        if (!indicators.hasOwnProperty(hashed)) {
             return {cancel: false};
         }
 
@@ -115,7 +86,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         msg = chrome.i18n.getMessage("dbgRawRequest", [JSON.stringify(data)]);
         if (debug) { console.log(msg); }
         var events = JSON.parse(localStorage.cfg_events);
-        var event = buildEvent(data, hostname);
+        var event = buildEvent(data, hostname, hashed);
         events.push(event);
         localStorage.cfg_events = JSON.stringify(events);
         localStorage[hostname] = JSON.stringify(event);

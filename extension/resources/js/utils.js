@@ -1,9 +1,10 @@
-function buildEvent(metadata, match) {
+function buildEvent(metadata, match, hashed) {
     var log = {
         'analysisTime': new Date(),
         'userAgent': navigator.userAgent,
         'indicatorMatch': match,
-        'metadata': {}
+        'metadata': {},
+        'hashMatch': hashed
     };
     Object.assign(log.metadata, metadata);
     return log;

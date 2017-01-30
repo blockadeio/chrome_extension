@@ -3,7 +3,7 @@
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "icons": {
         "16": "resources/ico/16.png",
         "48": "resources/ico/48.png",
@@ -20,8 +20,9 @@
     "background": {
         "scripts": ["resources/external/jquery.js", "resources/external/md5.js",
                     "resources/external/lzma-worker.min.js",
-                    "resources/js/utils.js", "resources/js/blockade.js",
-                    "resources/js/const.js", "resources/js/alarms.js",
+                    "resources/js/utils.js", "resources/js/const.js",
+                    "resources/js/init.js",
+                    "resources/js/libs/blockade.js", "resources/js/alarms.js",
                     "resources/js/background.js"],
         "persistent": true
     },

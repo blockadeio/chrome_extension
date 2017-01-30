@@ -7,7 +7,7 @@ function populate_setup() {
     document.getElementById("setupA1").innerHTML = chrome.i18n.getMessage("setupA1");
     document.getElementById("status").innerHTML = chrome.i18n.getMessage("setupSyncing");
     chrome.alarms.create("databaseUpdate",
-                         {delayInMinutes: 0.1, periodInMinutes: 0.1});
+                         {delayInMinutes: 0.1, periodInMinutes: 5});
     var statusCheck = setInterval(function () {
         var msg = "All done! <a href='demo.html' class='test'>Test extension</a>.";
         if (parseInt(localStorage.cfg_lastIndicatorCount) > 0) {

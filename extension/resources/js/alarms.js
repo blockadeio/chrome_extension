@@ -7,29 +7,66 @@
  */
 function processEvents() {
     var events = JSON.parse(localStorage.cfg_events);
-    for (var i = events.length -1; i >= 0 ; i--) {
-        if (events[i].indicatorMatch === "test.blockade.io") {
-            events.splice(i, 1);
-        }
-    }
     if (events.length === 0) {
         localStorage.cfg_events = JSON.stringify([]);
         return false;
     }
 
-    $.ajax({
-        url: localStorage.cfg_cloudUrl + 'send-event',
-        type: 'post',
-        dataType: 'json',
-        data: JSON.stringify({'events': events}),
-        contentType: "application/json",
-        success: function(data) {
-            if (data.success) {
-                localStorage.cfg_events = JSON.stringify([]);
-                var msg = chrome.i18n.getMessage("dbgProcessedEvents");
-                if (localStorage.cfg_debug === 'true') { console.log(msg); }
-            }
+    // Prune out our demo code
+    for (var i = events.length -1; i >= 0 ; i--) {
+        if (events[i].indicatorMatch === "test.blockade.io") {
+            events.splice(i, 1);
         }
+    }
+
+    var channels = JSON.parse(localStorage.cfg_channels);
+    if (channels.length === 0) {
+        msg = chrome.i18n.getMessage("dbgNoServer");
+        if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        return false;
+    }
+
+    var promises = [];
+    for (var i=0; i < channels.length; i++) {
+        var data = new FormData();
+        var matchedEvents = [];
+        for (var j=0; j < events.length; j++) {
+            toNotify = blockade.indicators[events[j].hashMatch];
+            if (toNotify.indexOf(channels[i].id) === -1) {
+                continue;
+            }
+            matchedEvents.push(events[j]);
+        }
+        var properties = {method: "POST", body: JSON.stringify({'events': events}),
+                          headers: {"Content-Type": "application/json"}};
+        promises.push(fetch(channels[i].url + 'send-events', properties));
+    }
+    Promise
+    .all(promises)
+    .then(function(response) {
+        var blobs = [];
+        for (var i=0; i < response.length; i++) {
+            blobs.push(response[i].json());
+        }
+        return Promise.all(blobs);
+    })
+    .then(function(blobs) {
+        localStorage.cfg_events = JSON.stringify([]);
+        var msg = chrome.i18n.getMessage("dbgProcessedEvents");
+        if (localStorage.cfg_debug === 'true') { console.log(msg); }
+    })
+    .catch(function(error) {
+        var message = chrome.i18n.getMessage("notifyRequestError",
+                                             [url, error.message]);
+        chrome.notifications.create('alert', {
+            type: 'basic',
+            iconUrl: ICON_LARGE,
+            title: chrome.i18n.getMessage("notifyRequestErrorTitle"),
+            message: message
+        }, function(notificationId) {
+            msg = chrome.i18n.getMessage("dbgNotificationCreated");
+            if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        });
     });
 }
 
@@ -64,16 +101,15 @@ function databaseUpdate() {
         return Promise.all(blobs);
     })
     .then(function(blobs) {
-        console.log(blobs);
         for (var i=0; i < blobs.length; i++) {
             if (!blobs[i].success) {
                 continue;
             }
             // Promises should return in order
             blobs[i].source = channels[i].id;
-            BlockadeIO.addSource(blobs[i]);
+            blockade.addSource(blobs[i]);
         }
-        BlockadeIO.finalize();
+        blockade.finalize();
     })
     .catch(function(error) {
         console.log(error);
@@ -101,11 +137,3 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
         databaseUpdate();
     }
 });
-
-// Kick-off alarms
-if (localStorage.cfg_configured === 'true') {
-    chrome.alarms.create("processEvents",
-                         {delayInMinutes: 0.1, periodInMinutes: 0.5});
-    var frequency = parseInt(localStorage.cfg_dbUpdateTime);
-    chrome.alarms.create("databaseUpdate", {periodInMinutes: frequency});
-}
