@@ -1,17 +1,14 @@
 /**
  * Functions to run once the extension has been loaded.
  */
-
-BlockadeIO.init();
 var parser = document.createElement('a');
 var pattern = new RegExp(/\bLTBYPASS-[0-9]{5}\b/g);
 var bypass = /#LTBYPASS-[0-9]{5}/;
-
+var client;
 
 (function() {
     if (typeof localStorage.cfg_init === "undefined") {
         localStorage.cfg_events = JSON.stringify([]);
-        localStorage.cfg_indicators = JSON.stringify({});
         localStorage.cfg_debug = false;
         localStorage.cfg_notifications = true;
         localStorage.cfg_feedback = true;
@@ -23,12 +20,34 @@ var bypass = /#LTBYPASS-[0-9]{5}/;
         localStorage.cfg_dbUpdateTime = 5;
         localStorage.cfg_channels = JSON.stringify([{
             id: 0,
-            url: 'https://api.blockade.io/',
+            url: 'http://35.167.207.232',
             contact: ''
         }]);
         chrome.tabs.create({'url': SETUP_PAGE});
     }
 })();
+
+var hosts = [];
+var parsed_channels = JSON.parse(localStorage.cfg_channels);
+for (var i=0; i < parsed_channels.length; i++) {
+    hosts.push(parsed_channels[i].url);
+}
+client = new BlockadeIO(hosts);
+client.connectAll();
+client.emitAll('fetchDb');
+client.addListener('initDb', function(data) {
+    var source = data.source;
+    console.log(data);
+    for (var i=0; i < data.indicators.length; i++) {
+        var indicator = data.indicators[i];
+        if (client.db.hasOwnProperty(indicator)) {
+            client.db[indicator].push(data.source);
+        } else {
+            client.db[indicator] = [data.source];
+        }
+    }
+    client.jobs--;
+});
 
 chrome.browserAction.onClicked.addListener(function(tab) {
     if (localStorage.cfg_isRunning === 'true') {
@@ -67,13 +86,12 @@ chrome.webRequest.onBeforeRequest.addListener(
         var hashed, indicators;
         var debug = localStorage.cfg_debug === 'true';
         var isRunning = localStorage.cfg_isRunning === 'true';
-        if (!(isRunning) || !(BlockadeIO.active)) {
+        if (!(isRunning)) {
             return {cancel: false};
         }
         parser.href = data.url;
         var hostname = parser.hostname;
         hashed = md5(hostname);
-        var twoBit = hashed.substring(0,2);
 
         if (pattern.exec(parser.hash)) {
             msg = chrome.i18n.getMessage("dbgBlockBypass");
@@ -86,14 +104,7 @@ chrome.webRequest.onBeforeRequest.addListener(
             return {redirectUrl: data.url};
         }
 
-        try {
-            indicators = JSON.parse(localStorage[twoBit]);
-        } catch(err) {
-            // Fail to parse means no key, so bounce out.
-            return {cancel: false};
-        }
-
-        if (indicators.indexOf(hashed) == -1) {
+        if (!client.db.hasOwnProperty(hashed)) {
             return {cancel: false};
         }
 

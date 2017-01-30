@@ -12,10 +12,6 @@ function save_options() {
     }
 
     // Kick-off alarms to perform an update on the indicators
-    chrome.alarms.create("processEvents",
-                         {delayInMinutes: 0.1, periodInMinutes: 0.5});
-    chrome.alarms.create("databaseUpdate",
-                         {delayInMinutes: 0.1, periodInMinutes: 1.0});
     localStorage.cfg_configured = true;
 
     // Update status to let user know options were saved.
@@ -104,7 +100,7 @@ function add_node() {
     localStorage.cfg_channels = JSON.stringify(channels);
     document.getElementById('cfg_cloudUrl').value = '';
     document.getElementById('cfg_contact').value = '';
-    chrome.alarms.create("databaseUpdate",
+    chrome.alarms.create("clientConnect",
                          {delayInMinutes: 0.1, periodInMinutes: 1.0});
     location.reload();
 }

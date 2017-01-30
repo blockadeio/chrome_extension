@@ -6,8 +6,6 @@ function populate_setup() {
     document.getElementById("setupQ1").innerHTML = chrome.i18n.getMessage("setupQ1");
     document.getElementById("setupA1").innerHTML = chrome.i18n.getMessage("setupA1");
     document.getElementById("status").innerHTML = chrome.i18n.getMessage("setupSyncing");
-    chrome.alarms.create("databaseUpdate",
-                         {delayInMinutes: 0.1, periodInMinutes: 0.1});
     var statusCheck = setInterval(function () {
         var msg = "All done! <a href='demo.html' class='test'>Test extension</a>.";
         if (parseInt(localStorage.cfg_lastIndicatorCount) > 0) {
@@ -15,8 +13,6 @@ function populate_setup() {
             document.getElementById("status").innerHTML = msg;
             localStorage.cfg_configured = true;
             clearInterval(statusCheck);
-            var frequency = parseInt(localStorage.cfg_dbUpdateTime);
-            chrome.alarms.create("databaseUpdate", {periodInMinutes: frequency});
             chrome.alarms.clear("setupWait");
         }
     }, 1000);

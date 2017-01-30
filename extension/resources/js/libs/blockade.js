@@ -1,69 +1,74 @@
-var BlockadeIO = {
-    indicatorCount: 0,
-    indicators: null,
-    sources: [],
+var BlockadeIO = function(hosts) {
+    var self = this;
+    self.hosts = hosts;
+    self.handles = [];
+    self.states = ['connect', 'event', 'disconnect'];
+    self.db = {};
+    self.jobs = 0;
 
-    init: function() {
-        if (localStorage.getItem("cfg_indicators") !== null) {
-            console.log("Loading signatures from storage");
-            var data = JSON.parse(localStorage.cfg_indicators);
-        }
-    },
+    self.onConnect = function() {
+        console.log("Connected");
+    };
 
-    addSource: function(data) {
-        if (localStorage.cfg_debug === 'true') {
-            console.log("Added source:", data);
-        }
-        BlockadeIO.sources.push(data);
-    },
+    self.onEvent = function(data) {
+        console.log("Event:", data);
+    };
 
-    finalize: function() {
-        if (localStorage.cfg_debug === 'true') { console.log("Finalizing"); }
-        var indicators = {};
-        for (var i=0; i < BlockadeIO.sources.length; i++) {
-            var data = BlockadeIO.sources[i];
-            for (var j=0; j < data.indicators.length; j++) {
-                var item = data.indicators[j];
-                if (indicators.hasOwnProperty(item)) {
-                    indicators[item].push(data.source);
-                } else {
-                    indicators[item] = [data.source];
-                }
-                indicators[item] = uniq(indicators[item]);
+    self.onDisconnect = function() {
+        console.log("Disconnected");
+    };
+
+    self.connectHost = function(host) {
+        var handle = io(host);
+        self.states.forEach(function(state) {
+            var f = `on${state.capitalize()}`;
+            if (self[f] === undefined) {
+                console.error(`"${state}" missing handler function of ${f}`);
             }
-        }
-        if (localStorage.cfg_debug === 'true') { console.log(indicators); }
-        var store = JSON.stringify(indicators);
-        BlockadeIO.indicatorCount = Object.keys(indicators).length;
-        BlockadeIO.indicators = indicators;
-        BlockadeIO.active = true;
-        if (localStorage.cfg_firstSync) {
-            if (BlockadeIO.indicatorCount > 0) {
-                localStorage.cfg_firstSync = false;
-                localStorage.cfg_dbUpdateTime = 15;
-            }
-        }
-        var msg = chrome.i18n.getMessage("dbgSavedItems",
-                                        [BlockadeIO.indicatorCount]);
-        if (BlockadeIO.indicatorCount >
-                parseInt(localStorage.cfg_lastIndicatorCount)) {
-            if (localStorage.cfg_notifications === 'true') {
-                chrome.notifications.create('info', {
-                    type: 'basic',
-                    iconUrl: ICON_LARGE,
-                    title: chrome.i18n.getMessage("notifyIndicatorSyncTitle"),
-                    message: msg
-                }, function(notificationId) {
-                    msg = chrome.i18n.getMessage("dbgNotificationCreated");
-                    if (localStorage.cfg_debug === 'true') { console.log(msg); }
-                });
-            }
-        }
-        localStorage.cfg_lastIndicatorCount = BlockadeIO.indicatorCount;
-        if (localStorage.cfg_debug === 'true') { console.log(msg); }
-        var frequency = parseInt(localStorage.cfg_dbUpdateTime);
-        chrome.alarms.create("databaseUpdate", {periodInMinutes: frequency});
-        return true;
-    }
+            handle.on(state, self[f]);
+        }, self);
+        console.log(`${host} states registered`);
+        var count = Object.keys(self.handles).length;
+        self.handles[host] = handle;
+    };
 
+    self.connectAll = function() {
+        console.log("Connecting hosts");
+        self.hosts.forEach(function(host) {
+            self.connectHost(host);
+        }, self);
+    };
+
+    self.emitHost = function(host, label, data) {
+        if (!self.handles.hasOwnProperty(host)) {
+            console.error(`Missing handle for ${host}`);
+            return;
+        }
+        var handle = self.handles[host];
+        handle.emit(label, data);
+    };
+
+    self.emitAll = function(label, data) {
+        console.log("Emitting across handles");
+        for (var key in self.handles) {
+            self.jobs += 1;
+            data = {'source': key};
+            self.emitHost(key, label, data);
+        }
+    };
+
+    self.addHostListener = function(host, label, func) {
+        if (!self.handles.hasOwnProperty(host)) {
+            console.error(`Missing handle for ${host}`);
+            return;
+        }
+        self.handles[host].on(label, func);
+    };
+
+    self.addListener = function(label, func) {
+        console.log("Adding listener to all handles");
+        for (var key in self.handles) {
+            self.addHostListener(key, label, func);
+        }
+    };
 };
