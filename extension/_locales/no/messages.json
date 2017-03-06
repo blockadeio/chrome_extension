@@ -21,6 +21,16 @@
             }
         }
     },
+    "dbgAddIndicator": {
+        "message": "$count$ indikatoren (e) ble sendt til skyen.",
+        "description": "Debug message outlining how many indicators were sent to the cloud",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
     "dbgProcessedEvents": {
         "message": "Hendelser ble prosessert og gjennomgått lokalt.",
         "description": "Debug message after processing local event alerts"

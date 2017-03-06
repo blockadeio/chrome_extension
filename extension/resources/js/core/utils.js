@@ -34,3 +34,20 @@ function uniq(a) {
         return seen.hasOwnProperty(item) ? false : (seen[item] = true);
     });
 }
+
+function loadContextMenus() {
+    chrome.contextMenus.removeAll();
+    chrome.contextMenus.create({"title": "Blockade", "id": "parent",
+                                "contexts": ['all']});
+    chrome.contextMenus.create({"title": "Send to cloud", "parentId": "parent",
+                                "contexts": ['all'], "id": "cloud"});
+    chrome.contextMenus.create({"title": "Options", "parentId": "parent",
+                                "contexts": ['all'], "id": "options"});
+    var channels = JSON.parse(localStorage.cfg_channels);
+    for (i = 0; i < channels.length; i++) {
+        var channel = channels[i].url;
+        var menuItem = {"title": channel, "parentId": "cloud",
+                        "contexts": ['all'], "id": channel};
+        chrome.contextMenus.create(menuItem);
+    }
+}

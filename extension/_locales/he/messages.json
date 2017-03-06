@@ -21,6 +21,16 @@
             }
         }
     },
+    "dbgAddIndicator": {
+        "message": "$count$ מחוון (ים) נשלח אל הענן.",
+        "description": "Debug message outlining how many indicators were sent to the cloud",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
     "dbgProcessedEvents": {
         "message": "ארועים עובדו ונוקו מקומית.",
         "description": "Debug message after processing local event alerts"

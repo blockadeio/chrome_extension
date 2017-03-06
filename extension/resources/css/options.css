@@ -13,7 +13,7 @@ a   { text-decoration:none; }
 input[type=text] {width: 40%;}
 
 #wrapper {
-    width:550px; margin:40px auto 80px auto;
+    width:900px; margin:40px auto 80px auto;
     border: 1px solid #000;
     background-color:#FFF;
     -webkit-border-radius:5px;

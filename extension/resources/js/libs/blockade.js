@@ -16,8 +16,6 @@ var BlockadeIO = function() {
      */
     self.init = function() {
         if (localStorage.getItem("cfg_indicators") !== "{}") {
-            console.log(localStorage.cfg_indicators);
-            console.log("Loading signatures from storage");
             var data = JSON.parse(localStorage.cfg_indicators);
             LZMA.decompress(data, function(decoded, error) {
                 self.indicators = JSON.parse(decoded);

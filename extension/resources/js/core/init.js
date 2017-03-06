@@ -18,7 +18,9 @@
         localStorage.cfg_channels = JSON.stringify([{
             id: 0,
             url: 'https://api.blockade.io/',
-            contact: 'info@blockade.io'
+            contact: 'info@blockade.io',
+            username: '',
+            api_key: ''
         }]);
         chrome.tabs.create({'url': SETUP_PAGE});
     }

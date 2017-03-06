@@ -50,6 +50,16 @@
             }
         }
     },
+    "dbgAddIndicator": {
+        "message": "$count$ Gösterge (ler) buluta gönderildi.",
+        "description": "Debug message outlining how many indicators were sent to the cloud",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
     "notifyAlertTitle": {
         "message": "Kötü amaçlı trafik engellendi!",
         "description": "Title of the notification window when a malicious event is detected"

@@ -21,6 +21,16 @@
             }
         }
     },
+    "dbgAddIndicator": {
+        "message": "$count$ Se enviaron indicadores a la nube.",
+        "description": "Debug message outlining how many indicators were sent to the cloud",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
     "dbgProcessedEvents": {
         "message": "Los eventos han sido procesados y limpiados localmente.",
         "description": "Debug message after processing local event alerts"

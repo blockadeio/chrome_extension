@@ -45,6 +45,8 @@ function restore_options() {
         var columns = [];
         columns.push($('<td/>').append(channels[i].url));
         columns.push($('<td/>').append(channels[i].contact));
+        columns.push($('<td/>').append(channels[i].username));
+        columns.push($('<td/>').append(channels[i].api_key));
         var btn = $('<button/>', {
             class: 'btn btn-xs btn-danger remove-node',
             text: '-',
@@ -100,13 +102,19 @@ function add_node() {
         }, 3000);
         return false;
     }
-    channels.push({'id': channels.length, 'url': url, 'contact': contact});
+    var username = document.getElementById('cfg_username').value;
+    var api_key = document.getElementById('cfg_apiKey').value;
+    channels.push({'id': channels.length, 'url': url, 'contact': contact,
+                   'username': username, 'api_key': api_key});
     localStorage.cfg_channels = JSON.stringify(channels);
     document.getElementById('cfg_cloudUrl').value = '';
     document.getElementById('cfg_contact').value = '';
+    document.getElementById('cfg_username').value = '';
+    document.getElementById('cfg_apiKey').value = '';
     chrome.alarms.create("databaseUpdate",
                          {delayInMinutes: 0.1, periodInMinutes: 1.0});
     location.reload();
+    loadContextMenus();
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);

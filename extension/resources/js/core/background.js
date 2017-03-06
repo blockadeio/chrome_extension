@@ -92,3 +92,72 @@ chrome.webRequest.onBeforeRequest.addListener(
     {urls: ["<all_urls>"]},
     ["blocking"]
 );
+
+chrome.contextMenus.onClicked.addListener(function(info, tab) {
+    if (info.menuItemId === "options") {
+        chrome.tabs.create({'url': OPTIONS_PAGE});
+        return false;
+    }
+    var channels = JSON.parse(localStorage.cfg_channels);
+    var matched = $.grep(channels, function(e){ return e.url == info.menuItemId; });
+    if (matched.length === 0) {
+        return false;
+    }
+    var channel = matched[0];
+    var parser = document.createElement('a');
+    parser.href = addProtocol(info.selectionText);
+    if (parser.hostname.indexOf('.') === -1) {
+        return false;
+    }
+    var indicator = md5(parser.hostname);
+    var properties = {method: "POST",
+                      body: JSON.stringify({'email': channel.username,
+                                            'api_key': channel.api_key,
+                                            'indicators': [indicator]}),
+                      headers: {"Content-Type": "application/json"}};
+    var promises = [fetch(channel.url + 'admin/add-indicators', properties)];
+    Promise
+    .all(promises)
+    .then(function(response) {
+        var blobs = [];
+        for (var i=0; i < response.length; i++) {
+            blobs.push(response[i].json());
+        }
+        return Promise.all(blobs);
+    })
+    .then(function(blobs) {
+        if (localStorage.cfg_notifications === 'true') {
+            var msg = chrome.i18n.getMessage("dbgAddIndicator",
+                                            [1]);
+            chrome.notifications.create('info', {
+                type: 'basic',
+                iconUrl: ICON_LARGE,
+                title: chrome.i18n.getMessage("notifyIndicatorSyncTitle"),
+                message: msg
+            }, function(notificationId) {
+                msg = chrome.i18n.getMessage("dbgNotificationCreated");
+                if (localStorage.cfg_debug === 'true') { console.log(msg); }
+            });
+        }
+        var msg = chrome.i18n.getMessage("dbgProcessedEvents");
+        if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        chrome.alarms.create("databaseUpdate",
+                             {delayInMinutes: 0.1, periodInMinutes: 1.0});
+    })
+    .catch(function(error) {
+        var message = chrome.i18n.getMessage("notifyRequestError",
+                                             ["URL", error.message]);
+        chrome.notifications.create('alert', {
+            type: 'basic',
+            iconUrl: ICON_LARGE,
+            title: chrome.i18n.getMessage("notifyRequestErrorTitle"),
+            message: message
+        }, function(notificationId) {
+            msg = chrome.i18n.getMessage("dbgNotificationCreated");
+            if (localStorage.cfg_debug === 'true') { console.log(msg); }
+        });
+    });
+});
+
+chrome.runtime.onInstalled.addListener(loadContextMenus);
+chrome.runtime.onStartup.addListener(loadContextMenus);
