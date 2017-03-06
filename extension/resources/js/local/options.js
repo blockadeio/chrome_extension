@@ -65,6 +65,7 @@ function restore_options() {
             channels.splice(i, 1);
             localStorage.cfg_channels = JSON.stringify(channels);
             location.reload();
+            loadContextMenus();
         }
     });
 }
