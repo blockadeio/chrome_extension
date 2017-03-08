@@ -1,3 +1,51 @@
+function add_node() {
+    var url = document.getElementById('cfg_cloudUrl').value;
+    if (url === '') {
+        var error = document.getElementById("error_message");
+        error.innerHTML = "Address can't be blank.";
+        setTimeout(function() {
+            error.innerHTML = "";
+        }, 3000);
+        return false;
+    }
+    url = addProtocol(url);
+    if (url.slice(-1) !== "/") {
+        url += "/";
+    }
+    var contact = document.getElementById('cfg_contact').value;
+    if (contact.indexOf('@') === -1 && contact !== '') {
+        var error = document.getElementById("error_message");
+        error.innerHTML = "Email was invalid.";
+        setTimeout(function() {
+            error.innerHTML = "";
+        }, 3000);
+        return false;
+    }
+    var channels = JSON.parse(localStorage.cfg_channels);
+    var result = $.grep(channels, function(e){ return e.url == url; });
+    if (result.length > 0) {
+        var error = document.getElementById("error_message");
+        error.innerHTML = "Address is already used.";
+        setTimeout(function() {
+            error.innerHTML = "";
+        }, 3000);
+        return false;
+    }
+    var username = document.getElementById('cfg_username').value;
+    var api_key = document.getElementById('cfg_apiKey').value;
+    channels.push({'id': channels.length, 'url': url, 'contact': contact,
+                   'username': username, 'api_key': api_key});
+    localStorage.cfg_channels = JSON.stringify(channels);
+    document.getElementById('cfg_cloudUrl').value = '';
+    document.getElementById('cfg_contact').value = '';
+    document.getElementById('cfg_username').value = '';
+    document.getElementById('cfg_apiKey').value = '';
+    chrome.alarms.create("databaseUpdate",
+                         {delayInMinutes: 0.1, periodInMinutes: 1.0});
+    location.reload();
+    loadContextMenus();
+}
+
 function save_options() {
     $('#save').toggleClass('btn-primary').toggleClass('btn-success');
     select_fields = ['cfg_debug', 'cfg_notifications', 'cfg_feedback'];
@@ -9,6 +57,11 @@ function save_options() {
                 break;
             }
         }
+    }
+
+    var url = document.getElementById('cfg_cloudUrl').value;
+    if (url !== '') {
+        add_node();
     }
 
     // Kick-off alarms to perform an update on the indicators
@@ -68,54 +121,6 @@ function restore_options() {
             loadContextMenus();
         }
     });
-}
-
-function add_node() {
-    var url = document.getElementById('cfg_cloudUrl').value;
-    if (url === '') {
-        var error = document.getElementById("error_message");
-        error.innerHTML = "Address can't be blank.";
-        setTimeout(function() {
-            error.innerHTML = "";
-        }, 3000);
-        return false;
-    }
-    url = addProtocol(url);
-    if (url.slice(-1) !== "/") {
-        url += "/";
-    }
-    var contact = document.getElementById('cfg_contact').value;
-    if (contact.indexOf('@') === -1 && contact !== '') {
-        var error = document.getElementById("error_message");
-        error.innerHTML = "Email was invalid.";
-        setTimeout(function() {
-            error.innerHTML = "";
-        }, 3000);
-        return false;
-    }
-    var channels = JSON.parse(localStorage.cfg_channels);
-    var result = $.grep(channels, function(e){ return e.url == url; });
-    if (result.length > 0) {
-        var error = document.getElementById("error_message");
-        error.innerHTML = "Address is already used.";
-        setTimeout(function() {
-            error.innerHTML = "";
-        }, 3000);
-        return false;
-    }
-    var username = document.getElementById('cfg_username').value;
-    var api_key = document.getElementById('cfg_apiKey').value;
-    channels.push({'id': channels.length, 'url': url, 'contact': contact,
-                   'username': username, 'api_key': api_key});
-    localStorage.cfg_channels = JSON.stringify(channels);
-    document.getElementById('cfg_cloudUrl').value = '';
-    document.getElementById('cfg_contact').value = '';
-    document.getElementById('cfg_username').value = '';
-    document.getElementById('cfg_apiKey').value = '';
-    chrome.alarms.create("databaseUpdate",
-                         {delayInMinutes: 0.1, periodInMinutes: 1.0});
-    location.reload();
-    loadContextMenus();
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);
