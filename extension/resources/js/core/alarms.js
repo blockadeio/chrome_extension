@@ -35,10 +35,11 @@ function processEvents() {
             if (toNotify.indexOf(channels[i].id) === -1) {
                 continue;
             }
+            events[j].contact = channels[i].contact;
             matchedEvents.push(events[j]);
         }
         var properties = {method: "POST",
-                          body: JSON.stringify({'events': events}),
+                          body: JSON.stringify({'events': matchedEvents}),
                           headers: {"Content-Type": "application/json"}};
         promises.push(fetch(channels[i].url + 'send-events', properties));
     }
