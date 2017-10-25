@@ -21,6 +21,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
             msg = chrome.i18n.getMessage("dbgNotificationCreated");
             if (localStorage.cfg_debug === 'true') { console.log(msg); }
         });
+        _gaq.push(['_trackEvent', 'extension', 'monitor_disabled']);
     } else {
         localStorage.cfg_isRunning = true;
         chrome.browserAction.setIcon({path: ICON_LIGHT});
@@ -35,6 +36,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
             msg = chrome.i18n.getMessage("dbgNotificationCreated");
             if (localStorage.cfg_debug === 'true') { console.log(msg); }
         });
+        _gaq.push(['_trackEvent', 'extension', 'monitor_enabled']);
     }
 });
 
@@ -87,6 +89,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         localStorage[hostname] = JSON.stringify(event);
         var redirect = chrome.extension.getURL(WARNING_PAGE);
         redirect += `?redirect=${data.url}`;
+        _gaq.push(['_trackEvent', 'extension', 'threat_blocked']);
         return {redirectUrl: redirect};
     },
     {urls: ["<all_urls>"]},
@@ -143,6 +146,7 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
         if (localStorage.cfg_debug === 'true') { console.log(msg); }
         chrome.alarms.create("databaseUpdate",
                              {delayInMinutes: 0.1, periodInMinutes: 1.0});
+        _gaq.push(['_trackEvent', 'extension', 'context_submission']);
     })
     .catch(function(error) {
         var message = chrome.i18n.getMessage("notifyRequestError",
@@ -156,6 +160,7 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
             msg = chrome.i18n.getMessage("dbgNotificationCreated");
             if (localStorage.cfg_debug === 'true') { console.log(msg); }
         });
+        _gaq.push(['_trackEvent', 'extension', 'context_submission_failure']);
     });
 });
 
