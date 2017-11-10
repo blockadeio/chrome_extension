@@ -1,10 +1,10 @@
 /**
  * Initialize our global space with a couple setup content and shared resources.
  */
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-89853823-2']);
-_gaq.push(['_setSessionCookieTimeout', 0]);
-_gaq.push(['_trackPageview', '/background']);
+// var _gaq = _gaq || [];
+// _gaq.push(['_setAccount', 'UA-89853823-2']);
+// _gaq.push(['_setSessionCookieTimeout', 0]);
+// _gaq.push(['_trackPageview', '/background']);
 (function() {
     if (typeof localStorage.cfg_init === "undefined") {
         localStorage.cfg_events = JSON.stringify([]);
@@ -28,12 +28,12 @@ _gaq.push(['_trackPageview', '/background']);
         }]);
         chrome.tabs.create({'url': SETUP_PAGE});
     }
-    var ga = document.createElement('script');
-    ga.type = 'text/javascript';
-    ga.async = false;
-    ga.src = 'https://ssl.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
+    // var ga = document.createElement('script');
+    // ga.type = 'text/javascript';
+    // ga.async = false;
+    // ga.src = 'https://ssl.google-analytics.com/ga.js';
+    // var s = document.getElementsByTagName('script')[0];
+    // s.parentNode.insertBefore(ga, s);
 })();
 
 var parser = document.createElement('a');

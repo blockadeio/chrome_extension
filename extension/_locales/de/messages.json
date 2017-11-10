@@ -152,7 +152,6 @@
         "description": "Title of the notification window when Blockade is turned on or off"
     },
     "warningProceedMessage": {
-        "message": "I am willing to accept the risk, temporarily allow access.",
         "message": "Ich akzeptiere das Risiko, lass much temporär auf die Resource zugreifen",
         "description": "Hyperlink label displayed that allows a user to access a malicious resource"
     },

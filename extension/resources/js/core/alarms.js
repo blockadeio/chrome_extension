@@ -56,7 +56,7 @@ function processEvents() {
         localStorage.cfg_events = JSON.stringify([]);
         var msg = chrome.i18n.getMessage("dbgProcessedEvents");
         if (localStorage.cfg_debug === 'true') { console.log(msg); }
-        _gaq.push(['_trackEvent', 'extension', 'submit_events']);
+        // _gaq.push(['_trackEvent', 'extension', 'submit_events']);
     })
     .catch(function(error) {
         var message = chrome.i18n.getMessage("notifyRequestError",
@@ -70,7 +70,7 @@ function processEvents() {
             msg = chrome.i18n.getMessage("dbgNotificationCreated");
             if (localStorage.cfg_debug === 'true') { console.log(msg); }
         });
-        _gaq.push(['_trackEvent', 'extension', 'submit_events_failure']);
+        // _gaq.push(['_trackEvent', 'extension', 'submit_events_failure']);
     });
 }
 
@@ -114,7 +114,7 @@ function databaseUpdate() {
             blockade.addSource(blobs[i]);
         }
         blockade.finalize();
-        _gaq.push(['_trackEvent', 'extension', 'get_indicators']);
+        // _gaq.push(['_trackEvent', 'extension', 'get_indicators']);
     })
     .catch(function(error) {
         var message = chrome.i18n.getMessage("notifyRequestError",
@@ -129,7 +129,7 @@ function databaseUpdate() {
             if (localStorage.cfg_debug === 'true') { console.log(msg); }
         });
         localStorage.cfg_lastIndicatorCount = -1;
-        _gaq.push(['_trackEvent', 'extension', 'get_indicators_failure']);
+        // _gaq.push(['_trackEvent', 'extension', 'get_indicators_failure']);
     });
 }
 
